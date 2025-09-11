@@ -9,22 +9,40 @@ main {
     margin-top: 80px; /* Add a top margin to avoid content overlay */
 }
 
+header {
+    background-color: #333;
+    display: flex;
+    color: white;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+    position: fixed; /* Set the header to fixed position */
+    top: 0; /* Position the header at the top of the page */
+    width: 100%; /* Full width */
+    z-index: 1000; /* Ensure the header is above other content */
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    padding-left: 20px;
+}
+
 nav {
     background-color: #333;
-    padding: 20px;
-    position: fixed; /* Set the navbar to fixed position */
-    top: 0; /* Position the navbar at the top of the page */
-    width: 100%; /* Full width */
+    display: flex;
+    position: relative;
+    align-items: center;
+    padding-right: 80px;
 }
 
 ul:not(.lista-cores) {
     list-style-type: none;
     display: flex inline;
-    padding-right: 0;
 }
 
 li a {
-    margin-right: 100px;
+    margin-left: 100px;
     font-size: large;
     text-decoration: none;
     color: white;
@@ -40,16 +58,8 @@ h1, h2, h3, h4, p {
     color: black;
 }
 
-.logo {
-    width: 60px;
-    height: auto;
-    padding-left: 10px;
-}
-
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+p {
+    font-size: large;
 }
 
 .camisas {
@@ -87,6 +97,6 @@ th, td {
     width: 50%;
 }
 
-/* .div {
-    padding-top: 40px;
-} */
+.div1 {
+    justify-content: space-around;
+}
