@@ -6,7 +6,7 @@ body {
 
 main {
     padding: 20px;
-    margin-top: 80px; /* Add a top margin to avoid content overlay */
+    margin-top: 60px; /* Add a top margin to avoid content overlay */
 }
 
 header {
@@ -14,7 +14,7 @@ header {
     display: flex;
     color: white;
     justify-content: space-between;
-    padding: 20px;
+    padding: 10px;
     align-items: center;
     position: fixed; /* Set the header to fixed position */
     top: 0; /* Position the header at the top of the page */
@@ -53,7 +53,7 @@ li a:hover {
   color: black;
 }
 
-h1, h2, h3, h4, p {
+h1, h2, h3, p {
     text-align: center;
     color: black;
 }
@@ -62,16 +62,21 @@ p {
     font-size: large;
 }
 
+.paragrafo {
+    line-height: 1.75;
+}
+
+
 .camisas {
     display: block;
     margin: 20px auto;
     max-width: 50%;
     height: auto;
     border-radius: 20px;
-    border: darkslategrey solid 1x;
+    border: gray solid 5x;
 }
 
-section div:not(.titulo-opcoes, .tamanhos-medidas) {
+section div:not(.titulo-opcoes, .tamanhos-medidas, .div-principal) {
     display: inline-flex;
     margin: 20px;
     padding: 20px;
@@ -79,6 +84,13 @@ section div:not(.titulo-opcoes, .tamanhos-medidas) {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 40%;
+}
+
+.div-principal {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 th, td {
@@ -93,10 +105,16 @@ th, td {
 }
 
 .titulo-opcoes {
-    display: flexbox;
+    display: flex;
     width: 50%;
+    padding-right: 20px;
 }
 
 .div1 {
     justify-content: space-around;
+}
+
+.lista-cores {
+    font-size: large;
+    line-height: 1.75;
 }
