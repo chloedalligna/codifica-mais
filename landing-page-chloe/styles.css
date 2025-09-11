@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+main {
+    padding: 20px;
+    margin-top: 80px; /* Add a top margin to avoid content overlay */
+}
+
+header {
+    background-color: #333;
+    display: flex;
+    color: white;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+    position: fixed; /* Set the header to fixed position */
+    top: 0; /* Position the header at the top of the page */
+    width: 100%; /* Full width */
+    z-index: 1000; /* Ensure the header is above other content */
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    padding-left: 20px;
+}
+
+nav {
+    background-color: #333;
+    display: flex;
+    position: relative;
+    align-items: center;
+    padding-right: 80px;
+}
+
+ul:not(.lista-cores) {
+    list-style-type: none;
+    display: flex inline;
+}
+
+li a {
+    margin-left: 100px;
+    font-size: large;
+    text-decoration: none;
+    color: white;
+}
+
+li a:hover {
+  background: #ddd;
+  color: black;
+}
+
+h1, h2, h3, h4, p {
+    text-align: center;
+    color: black;
+}
+
+p {
+    font-size: large;
+}
+
+.camisas {
+    display: block;
+    margin: 20px auto;
+    max-width: 50%;
+    height: auto;
+    border-radius: 20px;
+    border: darkslategrey solid 1x;
+}
+
+section div:not(.titulo-opcoes, .tamanhos-medidas) {
+    display: inline-flex;
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 40%;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.first-th {
+    background-color: #f2f2f2;
+    width: 100%;
+}
+
+.titulo-opcoes {
+    display: flexbox;
+    width: 50%;
+}
+
+.div1 {
+    justify-content: space-around;
+}
