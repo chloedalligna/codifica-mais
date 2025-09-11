@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+main {
+    padding: 20px;
+    margin-top: 80px; /* Add a top margin to avoid content overlay */
+}
+
+nav {
+    background-color: #333;
+    padding: 20px;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+}
+
+ul:not(.lista-cores) {
+    list-style-type: none;
+    display: flex inline;
+    padding-right: 0;
+}
+
+li a {
+    margin-right: 100px;
+    font-size: large;
+    text-decoration: none;
+    color: white;
+}
+
+li a:hover {
+  background: #ddd;
+  color: black;
+}
+
+h1, h2, h3, h4, p {
+    text-align: center;
+    color: black;
+}
+
+.logo {
+    width: 60px;
+    height: auto;
+    padding-left: 10px;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.camisas {
+    display: block;
+    margin: 20px auto;
+    max-width: 50%;
+    height: auto;
+    border-radius: 20px;
+    border: darkslategrey solid 1x;
+}
+
+section div:not(.titulo-opcoes, .tamanhos-medidas) {
+    display: inline-flex;
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 40%;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.first-th {
+    background-color: #f2f2f2;
+    width: 100%;
+}
+
+.titulo-opcoes {
+    display: flexbox;
+    width: 50%;
+}
+
+/* .div {
+    padding-top: 40px;
+} */
