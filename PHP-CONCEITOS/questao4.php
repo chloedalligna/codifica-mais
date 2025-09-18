@@ -13,7 +13,7 @@ while ($number != -1) {
     $number = readline("Digite um número inteiro (digite -1 para sair): ");
     if ($number > $maior) {
         $maior = $number;
-    } elseif ($number < $menor) {
+    } elseif (($number < $menor) && ($number != -1)) {
         $menor = $number;
     }
 }
