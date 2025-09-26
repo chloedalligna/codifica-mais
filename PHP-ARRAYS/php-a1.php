@@ -4,7 +4,6 @@
 Crie um programa que calcule a gorjeta a ser paga em um restaurante. O programa deve 
 solicitar ao usuário o valor total da conta e a porcentagem da gorjeta. Em seguida, o programa 
 deve calcular o valor da gorjeta e o valor total a ser pago, incluindo a gorjeta.
-
 Exemplo:
 ● Valor da conta: R$ 120,00
 ● Porcentagem da gorjeta: 10%
