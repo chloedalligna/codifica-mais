@@ -18,7 +18,12 @@ churrasco foi cancelado, todo mundo furou!” */
 $itensChurrasco = [];
 $precoItensChurrasco = [];
 
+echo "CHURRASCO\n";
+echo str_repeat("-=", 40) . "\n";
+
 $totalPessoasChurrasco = readline("Informe o total de participantes do churrasco: ");
+
+echo str_repeat("-=", 40) . PHP_EOL;
 
 if ($totalPessoasChurrasco <= 1) {
     echo "O churrasco foi cancelado, todo mundo furou!";
@@ -26,40 +31,54 @@ if ($totalPessoasChurrasco <= 1) {
 
     $maiorPreco = 0;
     while (True) {
-        $item = readline("Informe um item do churrasco (digite -1 para interromper a adição de itens): ");
-        if ($item == -1) {
+        $item = readline("Informe um item do churrasco (aperte Enter para interromper a adição de itens): ");
+        if ($item == null) {
+            echo str_repeat("-=", 40) . PHP_EOL;
             echo "Fim da lista de itens do churrasco.\n";
+            echo str_repeat("-=", 40) . PHP_EOL;
+
             break;
         }
         $itensChurrasco[] = $item;
         $precoItem = readline("Informe o preço do item do churrasco que você informou: R$");
         while ($precoItem <= 0) {
-            $precoItem = readline("Informe um preço maior que 0 para o item do churrasco: ");
+            $precoItem = readline("Informe um preço maior que 0 para o item do churrasco:");
         }
         $precoItensChurrasco[] = $precoItem;
         if ($precoItem > $maiorPreco) {
             $maiorPreco = $precoItem;
-            echo "\n" . $maiorPreco . "\n";
         }
+        echo str_repeat("--", 40) . PHP_EOL;
+
     }
 
     $indicesMaioresPrecos = [];
     foreach ($precoItensChurrasco as $indice => $preco) {
         if ($preco == $maiorPreco) {
             $indicesMaioresPrecos[] = $indice;
-            echo "\n" . $indice . "\n";
         }
     }
 
     $itensCaros = [];
     foreach ($indicesMaioresPrecos as $indice) {
-        $itensCaros[] = $indicesMaioresPrecos[$indice];
+        $itensCaros[] = $itensChurrasco[$indice];
     }
 
     $valorTotalItens = array_sum($precoItensChurrasco);
     $valorIndividual = calculoDivisaoChurras($valorTotalItens, $totalPessoasChurrasco);
 
-    echo "Cada participante deve pagar $valorIndividual e o(s) item(ns) mais caro(s) do churrasco é(são): " . $itensCaros . ", por R$$maiorPreco" . ".";
+    echo "Cada participante deve pagar $valorIndividual e o(s) item(ns) mais caro(s) do churrasco é(são):";
+
+    for ($i=0; $i < count($itensCaros); $i++) { 
+        echo ' ' . $itensCaros[$i];
+        if ($i == (count($itensCaros)-2)) {
+            echo ' e';
+        } elseif ($i < (count($itensCaros)-2)) {
+            echo ',';
+        }
+    }
+
+    echo " por R$$maiorPreco cada.";
 
 }
 
