@@ -79,7 +79,7 @@ foreach ($funcionarios as $colaborador) {
     $valorHoraExtra = calcularValorHoraExtra($colaborador['salário base']);
     $salarioTotal = calcularSalarioTotal($colaborador['salário base'], $colaborador['horas extras'], $valorHoraExtra);
     $colaborador['salário total'] = $salarioTotal;
-    echo "Salário total de " . $colaborador['nome'] . ": R$ $salarioTotal.\n";
+    echo "Salário total de {$colaborador['nome']}: R$ $salarioTotal.\n";
 }
 
 echo str_repeat("--", 40);

@@ -48,6 +48,10 @@ if ($totalPessoasChurrasco <= 1) {
         if ($precoItem > $maiorPreco) {
             $maiorPreco = $precoItem;
         }
+
+        // alternativa:
+        // $maiorPreco = max($precoItensChurrasco);
+
         echo str_repeat("--", 40) . PHP_EOL;
 
     }
