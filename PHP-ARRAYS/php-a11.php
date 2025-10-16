@@ -29,83 +29,151 @@ específico.
 // ];
 
 $estoque = [];
+$varivelSaida = true;
 
-$codigo; $nomeProduto; $tamanho; $cor; $quantidade = pedirDados();
+while ($varivelSaida) {
+echo "\nESTOQUE";
+$opcaoEscolhida = exibirMenu();
+
+switch ($opcaoEscolhida) {
+    case 1:
+      list($codigo, $nomeProduto, $tamanho, $cor, $quantidade) = pedirDados();
+      // echo "\n$codigo, $nomeProduto, $tamanho, $cor, $quantidade\n";
+      adicionarProduto($estoque, $codigo, $nomeProduto, $tamanho, $cor, $quantidade);
+      break;
+
+    case 2:
+      $codigoChave = readline('Informe o código do produto que deseja vender: ');
+      $quantidadeVendas = readline('Informe a quantidade deseja vender do produto: ');
+      venderProduto($estoque, $codigoChave, $quantidadeVendas);
+      break;
+
+    case 3:
+      $codigoChave = readline('Informe o código do produto que deseja verificar a disponibilidade no estoque: ');
+      verificarEstoque($estoque, $codigoChave);
+      break;
+
+    case 4:
+      listarEstoque($estoque);
+      break;
+
+    case 5:
+      echo "Programa encerrado.";
+      $varivelSaida = false;
+      break;
+  }
+  
+}
 
 // Função para oferecer as 5 opções ao usuário e continua em um loop até que o usuário escolha a opção de sair.
 
 function exibirMenu()
 {
-  echo "(1) Adicionar um produto\n
-  (2) Remover um produto\n
-  (3) Verificar o estoque\n
-  (4) Listar o estoque\n
-  (5) Sair\n";
-  $opcaoEscolhida = readline('Escolha uma das opções acima (digite o número correspondente):');
-  switch ($opcaoEscolhida) {
-    case 1:
-      pedirDados();
-      break;
-    case 2:
-      
-      break;
-    case 3:
-      # code...
-      break;
-    case 4:
-      # code...
-      break;
-    case 5:
-      # code...
-      break;
-    default:
-      echo "Número inválido.";
-      exibirMenu();
-      break;
+  echo "\n(1) Adicionar um produto \n(2) Remover um produto \n(3) Verificar o estoque \n(4) Listar o estoque \n(5) Sair\n\n";
+
+  $opcaoEscolhida = readline('Escolha uma das opções acima (digite o número correspondente): ');
+  while ($opcaoEscolhida != 1 && $opcaoEscolhida != 2 && $opcaoEscolhida != 3 && $opcaoEscolhida != 4 && $opcaoEscolhida != 5 ) {
+    echo "Número digitado inválido.\n";
+    $opcaoEscolhida = readline('Escolha uma das opções acima (digite o número correspondente): ');
   }
+  echo "\n";
+
+  return $opcaoEscolhida;
 }
 
 function pedirDados()
 {
-  $codigo = readline('Informe um código para o produto: ');
-  $nomeProduto = readline('Informe um nome válido para o produto: ');
-  $tamanho = readline('Informe um tamanho válido para o produto: ');
-  $cor = readline('Informe uma cor para o produto: ');
+  $codigo = readline('Informe o código do produto: ');
+  $nomeProduto = readline('Informe o nome do produto: ');
+  $tamanho = readline('Informe o tamanho do produto: ');
+  $cor = readline('Informe a cor do produto: ');
   $quantidade = readline('Digite a quantidade do produto: ');
-  return $codigo; $nomeProduto; $tamanho; $cor; $quantidade;
+  echo "\n";
+
+  return [$codigo, $nomeProduto, $tamanho, $cor, $quantidade];
 }
 
 // Adiciona um novo produto ao estoque, com seus atributos.
 
-function adicionarProduto(array $estoque, $codigo, string $nomeProduto, string $tamanho, string $cor, int $quantidade): array
+function adicionarProduto(array &$estoque, $codigo, string $nomeProduto, string $tamanho, string $cor, int $quantidade)
 {
-  $estoque[] = [
+  $estoque[$codigo] = [
     'codigo' => $codigo,
     'nome' => $nomeProduto,
     'tamanho' => $tamanho,
     'cor' => $cor,
     'quantidade' => $quantidade
   ];
-  return $estoque;
+
 }
 
 // Remove um produto do estoque, com seus atributos.
 
-function venderProduto($estoque, $codigo, $quantidade)
+function venderProduto(array &$estoque, $codigoChave, int $quantidadeVendas): array
 {
+  $disponibilidade = verificarEstoque($estoque, $codigoChave);
 
+  if ($disponibilidade) {
+
+    $quantidade = $estoque[$codigoChave]['quantidade'];
+
+    if ($quantidade > 0) {
+
+      if ($quantidade > $quantidadeVendas || $quantidade == $quantidadeVendas) {
+        $quantidade -= $quantidadeVendas;
+
+        if ($quantidade == 0) {
+          echo "Registro do produto será apagado do estoque, pois não há unidades restantes.";
+          echo "\n";
+          unset($estoque[$codigoChave]);
+
+        } else {
+          $estoque[$codigoChave]['quantidade'] = $quantidade;
+          echo "Quantidade restante: $quantidade unidades.";
+          echo "\n";
+        }
+
+      } else {
+        echo "Não é possível vender esta quantidade deste produto, pois há somente $quantidade unidades.";
+        echo "\n";
+      }
+    // } else {
+    //   echo "Não é possível vender esta quantidade deste produto, pois não há unidades restantes.";
+    //   echo "\n";
+    //   unset($estoque[$codigoChave]);
+    }
+  }
+  
+  return $estoque;
 }
 
 // Verifica se um produto com as características especificadas está disponível no estoque.
 
-function verificarEstoque($estoque, $codigo)
+function verificarEstoque($estoque, $codigoChave)
 {
-
+  $cont = 0;
+  foreach ($estoque as $chave => $produto) {
+    $cont++;
+    if ($chave == $codigoChave) {
+      echo "Há unidades desse produto no estoque.";
+      echo "\n";
+      return true;
+      break;
+    } elseif ($cont == count($estoque)){
+      echo "Não há esse produto no estoque.";
+      echo "\n";
+      return false;
+    }
+  }
 }
 
 // Imprime a lista completa do estoque, com todos os produtos e suas quantidades.
 
 function listarEstoque($estoque)
 {
-  
+  foreach ($estoque as $produto) {
+    list('codigo' => $codigo, 'nome' => $nomeProduto, 'tamanho' => $tamanho, 'cor' => $cor, 'quantidade' => $quantidade) = $produto;
+    echo "Produto: $nomeProduto \n- Código: $codigo \n- Tamanho: $tamanho \n- Cor: $cor \n- Quantidade: $quantidade\n";
+  }
+  echo "\n";
 }
