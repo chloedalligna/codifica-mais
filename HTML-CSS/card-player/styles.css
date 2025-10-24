@@ -1,0 +1,122 @@
+body {
+    font-family: Rubik, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgb(36, 40, 49);
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.player {
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+    background-color: white;
+    border-radius: 1.5vw;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.player-dados {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    padding: 4vh;
+    /* background-color: aqua; */
+}
+
+.player-dados2 {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    column-gap: 5%;
+    width: 100%;
+    height: auto;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    /* background-color: hotpink; */
+}
+
+.player-dados2-capa_album {
+    width: 100px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    border: 2px solid ;
+    border-radius: 10px;
+}
+
+.player-dados2-metadados {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    gap: 2vh;
+    /* background-color: green; */
+}
+
+.player-dados2-metadados-titulo {
+    width: 100%;
+    height: auto;
+    font-weight: 500;
+    /* background-color: teal; */
+}
+
+#titulo1 {
+    color: rgba(37, 150, 190);
+}
+
+#titulo2 {
+    color: gray;
+}
+
+#titulo3 {
+    color: rgb(36, 40, 49);
+}
+
+.player-dados-tempo {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    background-color: lightgray;
+    overflow: hidden;
+}
+
+#carregamento {
+    width: 32%;
+    height: 100%;
+    background-color: rgba(37, 150, 190);
+}
+
+#tempo {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: -2%;
+    color: rgb(36, 40, 49);
+    font-weight: 500;
+    font-size: smaller;
+    background-color: transparent;
+}
+
+li {
+    list-style-type: none;
+}
+
+.player-menu {
+    display: inline-flex;
+    justify-content: space-around;
+    padding: 4%;
+    background-color: lightgray;
+}
+
+/* .player-menu-icone {
+    border: 2px solid violet;
+} */
