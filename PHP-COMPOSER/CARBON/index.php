@@ -23,6 +23,7 @@ echo "Eu tenho " . $anos_vida . " anos de vida." . PHP_EOL;
 
 echo "Eu tenho " . (int) $data_nascimento->diffInDays($data_atual) . " dias de vida." . PHP_EOL;
 
-echo "Eu nasci num(a): " . $data_nascimento->format('l') . ".";
+echo "Eu nasci num(a): " . $data_nascimento->locale('pt_BR')->dayName . ".";
 
+// format('l')
 
