@@ -1,0 +1,18 @@
+{
+    "name": "chloedalligna/php-composer-a1",
+    "description": "Exercício Composer A1",
+    "autoload": {
+        "psr-4": {
+            "Chloedalligna\\PhpComposerA1\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Chloe",
+            "email": "raionbyjinn@gmail.com"
+        }
+    ],
+    "require": {
+        "nesbot/carbon": "^3.10"
+    }
+}
