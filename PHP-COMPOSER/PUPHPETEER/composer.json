@@ -1,0 +1,19 @@
+{
+    "name": "chloedalligna/php-composer-a2",
+    "autoload": {
+        "psr-4": {
+            "Chloedalligna\\PhpComposerA2\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Chloe",
+            "email": "raionbyjinn@gmail.com"
+        }
+    ],
+    "require": {
+        
+
+
+    }
+} 
