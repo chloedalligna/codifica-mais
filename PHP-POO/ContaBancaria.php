@@ -22,10 +22,12 @@ class ContaBancaria {
     {
         if ($quantia > $this->saldo) {
             echo "Saldo insuficiente para saque." . PHP_EOL;
-        } else {
-            $this->saldo -= $quantia;
-            echo "Saque de R$ $quantia efetuado, novo saldo: $this->saldo." . PHP_EOL;
+            return;
         }
+
+        $this->saldo -= $quantia;
+        echo "Saque de R$ $quantia efetuado, novo saldo: $this->saldo." . PHP_EOL;
+        
     }
     
     public function exibirSaldo()
