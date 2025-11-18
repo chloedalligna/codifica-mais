@@ -22,10 +22,12 @@ class Produto {
     {
         if ($novaQuantidade < 0) {
             echo "Estoque não pode ser negativo.\n\n";
-        } else {
-            echo "Alteração de estoque! \nEstoque anterior: $this->quantidade unidades\nNovo estoque: $novaQuantidade unidades\n\n";
-            $this->quantidade = $novaQuantidade;
+            return;
         }
+            
+        echo "Alteração de estoque! \nEstoque anterior: $this->quantidade unidades\nNovo estoque: $novaQuantidade unidades\n\n";
+        $this->quantidade = $novaQuantidade;
+        
     }
     
     public function exibirDetalhes()
