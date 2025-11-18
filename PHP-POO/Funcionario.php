@@ -22,10 +22,12 @@ class Funcionario {
     {
         if ($novoSalario < 0) {
             echo "Salário não pode ser negativo.\n\n";
-        } else {
-            echo "-- Alteração de salário -- \nSalário anterior: R$ $this->salario \nNovo salário: R$ $novoSalario \n\n";
-            $this->salario = $novoSalario;
+            return;
         }
+        
+        echo "-- Alteração de salário -- \nSalário anterior: R$ $this->salario \nNovo salário: R$ $novoSalario \n\n";
+        $this->salario = $novoSalario;
+
     }
     
     public function exibirDetalhes()
