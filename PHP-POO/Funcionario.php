@@ -14,7 +14,7 @@ class Funcionario {
 
     public function alterarCargo($novoCargo)
     {
-        echo "-- Alteração de cargo -- \nCargo anterior: $this->cargo \nNovo preço: $novoCargo\n\n";
+        echo "-- Alteração de cargo -- \nCargo anterior: $this->cargo \nNovo cargo: $novoCargo\n\n";
         $this->cargo = $novoCargo;
     }
     
