@@ -10,6 +10,10 @@ class Funcionario {
         $this->nome = $nome;
         $this->cargo = $cargo;
         $this->salario = $salario;
+
+        if ($salario < 1631) {
+            $this->salario = 1631;
+        }
     }
 
     public function alterarCargo($novoCargo)
@@ -20,19 +24,21 @@ class Funcionario {
     
     public function alterarSalario($novoSalario)
     {
-        if ($novoSalario < 0) {
-            echo "Salário não pode ser negativo.\n\n";
+        $salarioAntigoFormatado = number_format($this->salario, 2, ',', '.');
+        $novoSalarioFormatado = number_format($novoSalario, 2, ',', '.');
+        if ($novoSalario < 1631) {
+            echo "Você tentou modificar o salário de R$ {$salarioAntigoFormatado} para um valor menor que um salário mínimo. Operação cancelada.\n";
             return;
         }
-        
-        echo "-- Alteração de salário -- \nSalário anterior: R$ $this->salario \nNovo salário: R$ $novoSalario \n\n";
-        $this->salario = $novoSalario;
 
+        echo "-- Alteração de salário -- \nSalário anterior: R$ $salarioAntigoFormatado \nNovo salário: R$ $novoSalarioFormatado \n\n";
+        $this->salario = $novoSalario;
     }
     
     public function exibirDetalhes()
     {
-        echo "-- DADOS DO FUNCIONÁRIO -- \nNome: $this->nome \nCargo: $this->cargo \nSalário: R$ $this->salario" . PHP_EOL;
+        $salarioFormatado = number_format($this->salario, 2, ',', '.');
+        echo "-- DADOS DO FUNCIONÁRIO -- \nNome: $this->nome \nCargo: $this->cargo \nSalário: R$ $salarioFormatado" . PHP_EOL;
     }
 
 }
