@@ -2,28 +2,32 @@
 
 class ContaBancaria {
 
-    private $numeroConta;
-    private $nomeTitular;
-    private $saldo;
+    protected $numeroConta;
+    protected $titular;
+    protected $saldo;
 
-    public function __construct($numeroConta, $nomeTitular, $saldo = 0) {
-        $this->numeroConta = $numeroConta;
-        $this->nomeTitular = $nomeTitular;
-        $this->saldo = $saldo;
+    public function __construct($titular, $saldoInicial = 0) {
+        $this->titular = $titular;
+        $this->saldo = $saldoInicial;
 
-        if ($saldo < 0) {
+        if ($saldoInicial < 0) {
             $this->saldo = 0;
         }
     }
 
-    public static function criarConta($numeroConta, $nomeTitular, $saldo) {
-        if($saldo < 1500) {
-            echo "Não foi possível criar conta, saldo inferior a um salário mínimo.\n\n";
-            return null;
-        }
+//     public static function criarConta($numeroConta, $titular, $saldo) {
+//         if($saldo < 1500) {
+//             echo "Não foi possível criar conta, saldo inferior a um salário mínimo.\n\n";
+//             return null;
+//         }
         
-        echo "Conta criada!\n\n";
-        return new self($numeroConta, $nomeTitular, $saldo);
+//         echo "Conta criada!\n\n";
+//         return new self($numeroConta, $titular, $saldo);
+//     }
+
+    public function getTitular()
+    {
+        return $this->titular;
     }
 
     public function getSaldo()
@@ -60,30 +64,30 @@ class ContaBancaria {
     public function exibirSaldo()
     {
         $saldoFormatado = number_format($this->saldo, 2, ',', '.');
-        echo "\nNúmero da conta: $this->numeroConta \nTitular: $this->nomeTitular \nSaldo: R$ $saldoFormatado" . PHP_EOL;
+        echo "\nNúmero da conta: $this->numeroConta \nTitular: $this->titular \nSaldo: R$ $saldoFormatado" . PHP_EOL;
     }
 
 }
 
-$contaBancaria1 = ContaBancaria::criarConta('12345-6', 'Chloe', 1000000);
-// var_dump($contaBancaria1);
+// $contaBancaria1 = ContaBancaria::criarConta('12345-6', 'Chloe', 1000000);
+// // var_dump($contaBancaria1);
 
-$contaBancaria1->depositar(1000);
-$contaBancaria1->exibirSaldo();
+// $contaBancaria1->depositar(1000);
+// $contaBancaria1->exibirSaldo();
 
-$contaBancaria1->sacar(55);
-$contaBancaria1->exibirSaldo();
+// $contaBancaria1->sacar(55);
+// $contaBancaria1->exibirSaldo();
 
-// Quero comprar um avião
-$aviaoCusta = 10000000;
+// // Quero comprar um avião
+// $aviaoCusta = 10000000;
 
-// Posso comprar?
-if ($contaBancaria1->getSaldo() >= $aviaoCusta) {
-    echo "Posso comprar!\n";
-} else {
-    echo "Não posso comprar!\n";
-}
+// // Posso comprar?
+// if ($contaBancaria1->getSaldo() >= $aviaoCusta) {
+//     echo "Posso comprar!\n";
+// } else {
+//     echo "Não posso comprar!\n";
+// }
 
-$arrayDeContas = [
-    $contaBancaria1->getNumeroDaconta() => $contaBancaria1
-];
+// $arrayDeContas = [
+//     $contaBancaria1->getNumeroDaconta() => $contaBancaria1
+// ];
