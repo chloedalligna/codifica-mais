@@ -1,0 +1,22 @@
+body {
+    width: 100%;
+
+}
+
+header div {
+        width: 100%;
+        background-color: cadetblue;
+    }
+
+@media (min-width: 750px) {
+    header div {
+       height: 20%;
+    }
+}
+
+@media (min-width: 1100px) {
+    header div {
+       height: 30%;
+    }
+}
+
