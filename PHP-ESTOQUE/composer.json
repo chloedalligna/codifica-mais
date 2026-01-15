@@ -1,0 +1,16 @@
+{
+    "name": "chloe/php-estoque",
+    "description": "Projeto individual",
+    "autoload": {
+        "psr-4": {
+            "Chloe\\PhpEstoque\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Chloe",
+            "email": "raionbyjinn@gmail.com"
+        }
+    ],
+    "require": {}
+}
