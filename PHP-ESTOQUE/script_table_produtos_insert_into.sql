@@ -1,3 +1,5 @@
+CREATE DATABASE IF NOT EXISTS gestao_estoque;
+
 USE gestao_estoque;
 
 CREATE TABLE IF NOT EXISTS categorias (

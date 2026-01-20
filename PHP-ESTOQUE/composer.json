@@ -12,5 +12,7 @@
             "email": "raionbyjinn@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "fortawesome/font-awesome": "^7.1"
+    }
 }
