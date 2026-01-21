@@ -57,46 +57,17 @@ h1, h2, h3, h4, h5, h6 {
 
 /* MEU CSS */
 
+@import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
 body {
   width: 100%;
+  font-family: "Ubuntu", sans-serif;
 }
 
-@media screen and (max-width: 500px) {
-  header {
-    height: 10%;
-  }
-
-  .logo {
-    height: 10vh;
-    width: auto;
-  }
-
-  #pesquisa {
-    width: 50%;
-  }
-
-}
-
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-  header {
-      height: 20%;
-  }
-
-  .logo {
-    height: 10vh;
-    width: auto;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  header {
-      height: 30%;
-  }
-
-  .logo {
-    height: 10vh;
-    width: auto;
-  }
+h1, h2, h3, button {
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 /* HEADER */
@@ -110,71 +81,63 @@ header {
 }
 
 nav {
-  display: flex;
-  align-items: center;
   width: 100%;
 }
 
-.nav {
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.nav-menu-lateral {
-  position: fixed;
-  display: inline-flex;
-  align-items: center;
-  left: 20px;
-}
-
-.home {
-  position: fixed;
-  display: inline-flex;
-  align-items: center;
-  left: 60px;
-}
-
 .nav-lista {
-  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-around;
   flex-wrap: wrap;
   padding: 3px;
 }
 
+/* .nav-item {
+  border: 2px solid black;
+} */
+
 .nav-item-div {
+  /* border: white 2px solid; */
   display: inline-flex;
   align-items: center;
 }
 
-li {
-  list-style: none;
-  flex-direction: row;
-  /* margin: 0 1vw; */
+.nav-menu-lateral {
+  flex-grow: 0;
 }
 
-li a {
-  text-decoration: none;
+.nav-home {
+  flex-grow: 0;
 }
 
-.button, .login-avatar {
-  color: #1800ad;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
+.nav-pesquisador {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
 }
 
-.icon {
-  height: 4vh;
-  width: 4vh;
-  vertical-align: -0.125em;
+.nav-login {
+  flex-grow: 0;
 }
 
-.logo {
-  height: 12vh;
-  width: auto;
+.nav-menu-lateral-div {
+  left: 0px;
+  margin: 2vh 3vw;
+}
+
+.menu-lateral-botao {
+  padding: 0;
+}
+
+.home-div {
+  margin: 1vh 3vw 0 1vw;
+}
+
+.home-botao {
+  padding: 0;
+}
+
+.pesquisador-div {
+  padding: 0;
 }
 
 .pesquisador {
@@ -187,16 +150,13 @@ li a {
   background-color: #c7fae9;
   color: #1800ad;
   border: none;
-  border-radius: 10px;
+  border-radius: 20px;
   margin-right: 10px;
+  padding: 10px 15px 10px 15px;
 }
 
-.login-botao {
-  background-color: #31edae;
-  color: #1800ad;
-  border: none;
-  padding: 1vh 2vw;
-  border-radius: 10px;
+.login-div {
+  margin: 2vh 4vw;
 }
 
 .login-avatar {
@@ -207,6 +167,47 @@ li a {
   height: 6vh;
   width: 6vh;
 }
+
+.button, .login-avatar {
+  color: #1800ad;
+  background-color: transparent;
+  border: none;
+}
+
+.login-botao {
+  background-color: #31edae;
+  color: #1800ad;
+  font-size: large;
+  border: none;
+  padding: 12px 15px;
+  border-radius: 10px;
+}
+
+.login-botao:hover {
+  background-color: #1800ad;
+  color: #31edae;
+}
+
+.icon {
+  max-width: 2em;
+  max-height: 2em;
+  vertical-align: -0.125em;
+}
+
+li {
+  list-style: none;
+  flex-direction: row;
+}
+
+li a {
+  text-decoration: none;
+}
+
+.logo {
+  max-width: 13vw;
+  height: auto;
+}
+
 
 /* MAIN BODY */
 
@@ -257,4 +258,101 @@ main {
 .descricao {
   display: flex;
   justify-content: flex-start;
+}
+
+@media screen and (max-width: 500px) {
+
+  .nav-item {
+    border: 2px solid violet;
+  }
+
+  .nav-item-div {
+    border: yellow 2px solid;
+  }
+
+  .nav-pesquisador {
+    flex-grow: 0;
+    width: 70%;
+  }
+
+  .home-div {
+    margin: 0;
+    padding-left: 1vw;
+  }
+
+  .pesquisador-div {
+    width: 100%;
+  }
+
+  .pesquisador {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #pesquisa {
+    height: 2em;
+    width: 100%;
+  }
+
+  .login-div {
+    margin: 0 1vw 0 4vw;
+  }
+
+  .login-botao {
+    font-size: medium;
+    padding: 10px 13px;
+    border-radius: 10px;
+  }
+
+  .avatar {
+    height: 2em;
+    width: 2em;
+  }
+
+  .icon {
+    width: 1.5em;
+    height: 1.5em;
+  }
+
+  .logo {
+    min-width: 32vh;
+    height: auto;
+  }
+
+}
+
+@media screen and (min-width: 501px) and (max-width: 1023px) {
+    
+  .nav-item {
+    border: 2px solid green;
+  }
+
+  .nav-item-div {
+    border: darkred 2px solid;
+  }
+
+  .pesquisador-div {
+    padding: 0;
+    width: 100%;
+  }
+
+  #pesquisa {
+    width: 100%;
+  }
+
+  .icon {
+    width: 1.5em;
+    height: 1.5em;
+  }
+
+  .logo {
+    min-width: 15vh;
+    height: auto;
+  }
+
+}
+
+@media screen and (min-width: 1024px) {
+ 
 }

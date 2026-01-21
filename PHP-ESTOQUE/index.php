@@ -22,55 +22,61 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
 
+    <!-- CORES DA PAG: #1800ad #31edae #c7fae9 #ff751f #ffc099 #ffd9c2 -->
+
     <header>
         <nav>
-            <span class="nav">
-                <ul class="nav nav-lista">
-                    <li class="nav-item nav-menu-lateral"> 
-                        <div class="nav-item-div nav-menu-lateral">
-                            <button class="menu-lateral-botao button" onclick="mostrarMenu()">
-                                <svg class="menu-lateral icon">
-                                    <use href=".\vendor\fortawesome\font-awesome\sprites/solid.svg#bars" />
-                                </svg>
-                            </button>
-                        </div>
-                    </li>
-                    <li class="nav-item home">
-                        <div class="nav-item-div home">
-                            <a href="" class="home-botao"><img class="logo" src=".\img\1-removebg-1.png" alt="logo"></a>
-                        </div>
-                    </li>
-                    <li class="nav-item"> 
-                        <div class="nav-item-div pesquisador">
-                            <input type="search" id="pesquisa" name="q" placeholder=""/>
-                            <button type="submit" class="pesquisador button">
-                                <svg class="pesquisador icon">
-                                    <use href=".\vendor\fortawesome\font-awesome\sprites/solid.svg#magnifying-glass" />
-                                </svg>
-                            </button>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div class="nav-item-div login">
-                            <button class="login-botao button">
-                                Login
-                            </button>
-                            <a href="" class="login-avatar">
-                                <svg class="avatar icon">
-                                    <use href=".\vendor\fortawesome\font-awesome\sprites/solid.svg#user" />
-                                </svg>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-            </span>
+            <ul class="nav nav-lista">
+                <li class="nav-item nav-menu-lateral"> 
+                    <div class="nav-item-div nav-menu-lateral-div">
+                        <button class="menu-lateral-botao button" onclick="mostrarMenu()">
+                            <svg class="menu-lateral icon">
+                                <use href=".\vendor\fortawesome\font-awesome\sprites/solid.svg#bars" />
+                            </svg>
+                        </button>
+                    </div>
+                </li>
+                <li class="nav-item nav-home">
+                    <div class="nav-item-div home-div">
+                        <a href="" class="home-botao">
+                            <picture>
+                                <source srcset=".\assets\2-removebg-2.png" media="(max-width: 790px)">
+                                <source srcset=".\assets\1-removebg-1.png" media="(min-width: 1024px)">
+                                <img class="logo" src=".\assets\1-removebg-1.png" alt="logo">
+                            </picture>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item nav-pesquisador"> 
+                    <div class="nav-item-div pesquisador-div">
+                        <input type="search" id="pesquisa" name="q" placeholder=""/>
+                        <button type="submit" class="pesquisador button">
+                            <svg class="pesquisador icon">
+                                <use href=".\vendor\fortawesome\font-awesome\sprites/solid.svg#magnifying-glass" />
+                            </svg>
+                        </button>
+                    </div>
+                </li>
+                <li class="nav-item nav-login">
+                    <div class="nav-item-div login-div">
+                        <button class="login-botao button">
+                            LOGIN
+                        </button>
+                        <a href="" class="login-avatar">
+                            <svg class="avatar icon">
+                                <use href=".\vendor\fortawesome\font-awesome\sprites/solid.svg#user" />
+                            </svg>
+                        </a>
+                    </div>
+                </li>
+            </ul>
         </nav>
-
-    <!-- #1800ad #31edae #c7fae9 #ff751f #ffc099 #ffd9c2 -->
-
     </header>
 
     <section>
