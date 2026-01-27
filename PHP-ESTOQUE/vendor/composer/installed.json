@@ -1,52 +1,60 @@
 {
     "packages": [
         {
-            "name": "fortawesome/font-awesome",
-            "version": "7.1.0",
-            "version_normalized": "7.1.0.0",
+            "name": "khill/fontawesomephp",
+            "version": "2.0",
+            "version_normalized": "2.0.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/FortAwesome/Font-Awesome.git",
-                "reference": "41cfe644047fc3a4c49c22acc721cacc3e1021fe"
+                "url": "https://github.com/kevinkhill/FontAwesomePHP.git",
+                "reference": "324fdac57c319f7212d4be2e47f1d03c3f015e1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/41cfe644047fc3a4c49c22acc721cacc3e1021fe",
-                "reference": "41cfe644047fc3a4c49c22acc721cacc3e1021fe",
+                "url": "https://api.github.com/repos/kevinkhill/FontAwesomePHP/zipball/324fdac57c319f7212d4be2e47f1d03c3f015e1a",
+                "reference": "324fdac57c319f7212d4be2e47f1d03c3f015e1a",
                 "shasum": ""
             },
-            "time": "2025-10-01T19:14:40+00:00",
+            "require-dev": {
+                "phpunit/phpunit": "~4.8",
+                "satooshi/php-coveralls": "~1.0",
+                "squizlabs/php_codesniffer": "~2.5"
+            },
+            "time": "2018-06-19T17:27:46+00:00",
             "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "FA": "Khill\\FontAwesome\\Laravel\\FontAwesomeFacade"
+                    },
+                    "providers": [
+                        "Khill\\FontAwesome\\Laravel\\FontAwesomeServiceProvider"
+                    ]
+                }
+            },
             "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Khill\\FontAwesome\\": "src/"
+                }
+            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "CC-BY-4.0",
-                "OFL-1.1",
                 "MIT"
             ],
             "authors": [
                 {
-                    "name": "The Font Awesome Team",
-                    "homepage": "https://github.com/orgs/FortAwesome/people"
+                    "name": "Kevin Hill",
+                    "email": "kevinkhill@gmail.com",
+                    "role": "Developer"
                 }
             ],
-            "description": "The iconic font, CSS, and SVG framework",
-            "homepage": "https://fontawesome.com",
-            "keywords": [
-                "FontAwesome",
-                "awesome",
-                "bootstrap",
-                "font",
-                "icon",
-                "svg"
-            ],
+            "description": "PHP wrapper library for the fantastic Font Awesome icon set.",
             "support": {
-                "docs": "http://fontawesome.com/docs",
-                "email": "hello@fontawesome.com",
-                "issues": "https://github.com/FortAwesome/Font-Awesome/issues",
-                "source": "https://github.com/FortAwesome/Font-Awesome"
+                "issues": "https://github.com/kevinkhill/FontAwesomePHP/issues",
+                "source": "https://github.com/kevinkhill/FontAwesomePHP/tree/2.0"
             },
-            "install-path": "../fortawesome/font-awesome"
+            "install-path": "../khill/fontawesomephp"
         }
     ],
     "dev": true,

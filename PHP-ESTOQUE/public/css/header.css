@@ -1,10 +1,14 @@
+
 /* HEADER */
 
 header {
+  z-index: 3;
   position: fixed;
-  height: fit-content;
+  display: flex;
+  align-items: center;
+  height: 15vh;
   width: 100%;
-  background-color: #ff751f;
+  background-color: var(--laranja);
   padding: 1vh;
 }
 
@@ -19,18 +23,18 @@ nav {
   padding: 3px;
 }
 
-/* .nav-li {
+.nav-li {
   border: 2px solid black;
-} */
+}
 
 .nav-li-div {
-  /* border: white 2px solid; */
+  border: white 2px solid;
   display: inline-flex;
   align-items: center;
 }
 
 .nav-menu-lateral {
-  flex-grow: 0;
+  flex-grow: 0
 }
 
 .nav-home {
@@ -75,8 +79,8 @@ nav {
 }
 
 #pesquisa {
-  background-color: #c7fae9;
-  color: #1800ad;
+  background-color: var(--ciano-claro);
+  color: var(--azul-escuro);
   border: none;
   border-radius: 20px;
   margin-right: 10px;
@@ -97,14 +101,14 @@ nav {
 }
 
 .button, .login-avatar {
-  color: #1800ad;
+  color: var(--azul-escuro);
   background-color: transparent;
   border: none;
 }
 
 .login-botao {
-  background-color: #31edae;
-  color: #1800ad;
+  background-color: var(--ciano);
+  color: var(--azul-escuro);
   font-size: large;
   border: none;
   padding: 12px 15px;
@@ -112,8 +116,8 @@ nav {
 }
 
 .login-botao:hover {
-  background-color: #1800ad;
-  color: #31edae;
+  background-color: var(--azul-escuro);
+  color: var(--ciano);
 }
 
 .icon {
@@ -135,8 +139,6 @@ li a {
   max-width: 13vw;
   height: auto;
 }
-
-
 
 @media screen and (max-width: 500px) {
 

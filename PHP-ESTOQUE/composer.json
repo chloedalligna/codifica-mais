@@ -13,6 +13,7 @@
         }
     ],
     "require": {
-        "fortawesome/font-awesome": "^7.1"
+        "khill/fontawesomephp" : "~2.0",
+        "ext-pdo": "*"
     }
 }

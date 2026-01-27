@@ -6,5 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Khill\\FontAwesome\\' => array($vendorDir . '/khill/fontawesomephp/src'),
     'Chloe\\PhpEstoque\\' => array($baseDir . '/src'),
 );

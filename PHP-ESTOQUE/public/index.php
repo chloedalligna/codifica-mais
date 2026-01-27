@@ -1,30 +1,29 @@
 <?php
 
-if (!array_key_exists('PATH_INFO', $_SERVER) || ($_SERVER['PATH_INFO'] === '/')) {
-    require_once 'pagina_inicial.php';
-    
-} elseif ($_SERVER['PATH_INFO'] === '/cadastro') {
-    
-    if ($_SERVER['REQUEST_METHOD'] === $_GET) {
-        require_once 'cadastrar_produto.php';
+use Chloe\PhpEstoque\ConnectionPdo;
+use Chloe\PhpEstoque\Controller\Controller;
+use Chloe\PhpEstoque\Controller\Error404Controller;
+use Chloe\PhpEstoque\Repository\ProductRepository;
 
-    } elseif ($_SERVER['REQUEST_METHOD'] === $_POST) {
-        require_once 'pagina_inicial.php';
-    }
-}  elseif ($_SERVER['PATH_INFO'] === '/edicao') {
+require_once __DIR__ . '/../vendor/autoload.php';
 
-    if ($_SERVER['REQUEST_METHOD'] === $_GET) {
-        require_once 'cadastrar_produto.php';
+$pdo = ConnectionPdo::connect();
+$repository = new ProductRepository($pdo);
 
-    } elseif ($_SERVER['REQUEST_METHOD'] === $_POST) {
-        require_once 'editar_produto.php';
-    }
-} elseif ($_SERVER['PATH_INFO'] === '/exclusao') {
+$routes = require_once __DIR__ . "/../config/routes.php";
 
-    if ($_SERVER['REQUEST_METHOD'] === $_GET) {
-        require_once 'excluir_produto.php';
+$path_info = $_SERVER['PATH_INFO'] ?? '/';
+$httpMethod = $_SERVER['REQUEST_METHOD'];
 
-    } elseif ($_SERVER['REQUEST_METHOD'] === $_POST) {
-        require_once 'pagina_inicial.php';
-    }
+$key = $routes[$httpMethod][$path_info];
+
+if (array_key_exists($key, $routes)) {
+    $controllerClass = $routes[$httpMethod][$path_info];
+    $controller = new $controllerClass($repository);
+
+} else {
+    $controllerClass = new Error404Controller();
 }
+
+/** @var Controller $controller */
+$controller->processaRequisicao();

@@ -7,6 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInit532120e7b5530d9c20540bbca44e26e6
 {
     public static $prefixLengthsPsr4 = array (
+        'K' => 
+        array (
+            'Khill\\FontAwesome\\' => 18,
+        ),
         'C' => 
         array (
             'Chloe\\PhpEstoque\\' => 17,
@@ -14,6 +18,10 @@ class ComposerStaticInit532120e7b5530d9c20540bbca44e26e6
     );
 
     public static $prefixDirsPsr4 = array (
+        'Khill\\FontAwesome\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/khill/fontawesomephp/src',
+        ),
         'Chloe\\PhpEstoque\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
