@@ -2,13 +2,11 @@
 
 namespace Chloe\PhpEstoque\Controller;
 
-use Chloe\PhpEstoque\Controller\Controller;
-use Chloe\PhpEstoque\Repository\ProductRepository;
+use Chloe\PhpEstoque\Repository\UserRepository;
 
 class LoginFormController implements Controller
 {
-
-    private ProductRepository $repository;
+    private UserRepository $repository;
     public function __construct($repository)
     {
         $this->repository = $repository;
@@ -16,8 +14,6 @@ class LoginFormController implements Controller
 
     public function processRequest(): void
     {
-        // TODO: Implement processRequest() method.
-
         require_once __DIR__ . '/../../views/login.php';
     }
 }

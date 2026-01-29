@@ -2,12 +2,11 @@
 
 namespace Chloe\PhpEstoque\Controller;
 
-use Chloe\PhpEstoque\Repository\ProductRepository;
+use Chloe\PhpEstoque\Repository\UserRepository;
 
 class SignupFormController implements Controller
 {
-
-    private ProductRepository $repository;
+    private UserRepository $repository;
     public function __construct($repository)
     {
         $this->repository = $repository;

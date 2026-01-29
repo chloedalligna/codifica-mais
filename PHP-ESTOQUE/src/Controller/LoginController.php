@@ -2,12 +2,12 @@
 
 namespace Chloe\PhpEstoque\Controller;
 
-use Chloe\PhpEstoque\Repository\ProductRepository;
+use Chloe\PhpEstoque\Repository\UserRepository;
+use PDO;
 
 class LoginController implements Controller
 {
-
-    private ProductRepository $repository;
+    private UserRepository $repository;
     public function __construct($repository)
     {
         $this->repository = $repository;
@@ -15,6 +15,13 @@ class LoginController implements Controller
 
     public function processRequest(): void
     {
+        $username = filter_input(INPUT_POST, 'username');
+        if (!$username) {
+            $error_message = 'Por favor, digite um nome de usuário válido.';
+            echo $error_message;
+            header('Location: /login?erro=usuario_invalido');
+            exit();
+        }
 
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         if (!$email) { // (!$email) => ($email === false || $email === null || $email === '')
@@ -23,13 +30,7 @@ class LoginController implements Controller
             header('Location: /login?erro=email_invalido');
             exit();
         }
-        $username = filter_input(INPUT_POST, 'username');
-        if (!$username) {
-            $error_message = 'Por favor, digite um nome de usuário válido.';
-            echo $error_message;
-            header('Location: /login?erro=usuario_invalido');
-            exit();
-        }
+
         $password = filter_input(INPUT_POST, 'password');
         if (!$password) {
             $error_message = 'Por favor, digite uma senha válida.';
@@ -38,20 +39,24 @@ class LoginController implements Controller
             exit();
         }
 
-        if (isset($email, $username, $password)) {
-            $sql = 'SELECT * FROM users WHERE email = :email';
-            $statement = $pdo->prepare($sql);
-            $statement->bindValue(':email', $email);
-            $statement->execute();
-            $user = $statement->fetch(PDO::FETCH_ASSOC);
+        if (isset($_POST['login'])) {
 
+            $result = $this->repository->authenticateUser($email, $password);
 
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['username'] = $user['username'];
-                header('Location: /dashboard.php');
+            if ($result === false || $result === null) {
+                $error_message = 'E-mail ou senha inválidos.';
+                echo $error_message;
+                header('Location: /login?erro=credenciais_invalidas');
                 exit();
+
             } else {
-                $error_message = 'Invalid email or password.';
+                $_SESSION['username'] = $username;
+                $_SESSION['email'] = $email;
+                $_SESSION['logado'] = true;
+
+                header('Location: /?sucesso=usuario_logado');
+                exit();
+
             }
         }
 

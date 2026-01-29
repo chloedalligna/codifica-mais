@@ -68,14 +68,10 @@ class UserRepository
 
         $statement = $this->pdo->prepare($sql);
 
-        $statement->bindValue(':nome_produto', $product->getNameProduct());
-        $statement->bindValue(':id_categoria', $product->getIdCategory());
-        $statement->bindValue(':id_subcategoria', $product->getIdSubcategory());
-        $statement->bindValue(':preco', $product->getPrice());
-        $statement->bindValue(':quantidade', $product->getQuantity());
-        $statement->bindValue(':imagem_url', $product->getImageUrl());
-        $statement->bindValue(':descricao', $product->getIdStatus());
-        $statement->bindValue(':id_status', 1); // Definindo status padrão como 1 (ativo)
+        $statement->bindValue(':username', $user->getNameProduct());
+        $statement->bindValue(':email', $user->getIdCategory());
+        $statement->bindValue(':password', $user->getIdSubcategory());
+        $statement->bindValue(':authorization_level', $user->getPrice());
 
         $result = $statement->execute();
 
@@ -84,7 +80,7 @@ class UserRepository
         }
 
         $id = $this->pdo->lastInsertId();
-        $product->setId(intval($id));
+        $user->setId(intval($id));
 
         return $result;
     }
@@ -126,9 +122,9 @@ class UserRepository
         return $statement->execute();
     }
 
-    public function findById(int $id): Product
+    public function findById(int $id): User
     {
-        $sql = 'SELECT * FROM produtos WHERE id = ?';
+        $sql = 'SELECT * FROM users WHERE id = ?';
 
         $statement = $this->pdo->prepare($sql);
         $statement->bindValue(1, $id, \PDO::PARAM_INT);
@@ -136,13 +132,13 @@ class UserRepository
         $statement->execute();
 
         if ($statement->rowCount() !== 1) {
-            header('Location: /?erro=produto_inexistente');
+            header('Location: /?erro=user_inexistente');
             exit();
         }
 
-        $productData = $statement->fetch(\PDO::FETCH_ASSOC);
+        $userData = $statement->fetch(\PDO::FETCH_ASSOC);
 
-        return $this->databaseToModel($productData);
+        return $this->databaseToModel($userData);
     }
 
     public function authenticateUser($email, $password)
@@ -160,11 +156,11 @@ class UserRepository
 
         if ($correctPassword) {
             header('Location: /');
+            return $correctPassword;
         } else {
             header('Location: /login?erro=credenciais_invalidas');
+            return $correctPassword;
         }
-
-
 
     }
 

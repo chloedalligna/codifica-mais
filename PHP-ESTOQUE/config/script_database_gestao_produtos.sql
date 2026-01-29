@@ -37,8 +37,11 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(255),
     email VARCHAR(255),
     password VARCHAR(255),
-    authorization_level ARRAY<VARCHAR(100)>
+    authorization_level VARCHAR(100)
 );
+
+INSERT INTO users (username, email, password, authorization_level) VALUES
+('admin', 'admin@admin.com', '123456', 'adm');
 
 ALTER TABLE produtos
 ADD COLUMN id_status INT REFERENCES status_estoque(id_status);

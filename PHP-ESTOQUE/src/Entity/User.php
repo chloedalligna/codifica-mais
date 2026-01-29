@@ -12,7 +12,7 @@ class User
 
     private string $password;
 
-    private boolean $authorization;
+    private string $authorization;
 
     public function __construct(string $username, string $email, string $password)
     {
@@ -26,10 +26,7 @@ class User
         $this->id = $id;
     }
 
-    /**
-     * @param bool $authorization
-     */
-    public function setAuthorization(bool $authorization): void
+    public function setAuthorization(string $authorization): void
     {
         $this->authorization = $authorization;
     }
