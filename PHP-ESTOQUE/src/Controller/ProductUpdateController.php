@@ -4,9 +4,8 @@ namespace Chloe\PhpEstoque\Controller;
 
 use Chloe\PhpEstoque\Entity\Product;
 use Chloe\PhpEstoque\Repository\ProductRepository;
-use Controller;
 
-class UpdateController implements Controller
+class ProductUpdateController implements Controller
 {
     private ProductRepository $repository;
     public function __construct($repository)
@@ -14,7 +13,7 @@ class UpdateController implements Controller
         $this->repository = $repository;
     }
 
-    public function processaRequisicao(): void
+    public function processRequest(): void
     {
         $listSubcategories = $this->repository->listSubcategories();
 
@@ -73,9 +72,9 @@ class UpdateController implements Controller
             $result = $this->repository->updateProduct($product);
 
             if ($result === false) {
-                header('Location: /index.php?erro=falha_atualizacao');
+                header('Location: /?erro=falha_atualizacao');
             } else {
-                header('Location: /index.php?sucesso=produto_atualizado');
+                header('Location: /?sucesso=produto_atualizado');
             }
 
         }

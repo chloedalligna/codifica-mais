@@ -4,20 +4,34 @@ namespace Chloe\PhpEstoque\Entity;
 
 class User
 {
-    private ?int $id;
-
-    private string $email;
+    private int $id;
 
     private string $username;
 
+    private string $email;
+
     private string $password;
 
-    public function __construct(?int $id, string $email, string $username, string $password)
+    private boolean $authorization;
+
+    public function __construct(string $username, string $email, string $password)
     {
-        $this->id = $id;
         $this->setEmail($email);
         $this->username = $username;
-        $this->password = $password;
+        $this->password = password_hash($password, PASSWORD_ARGON2ID);
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param bool $authorization
+     */
+    public function setAuthorization(bool $authorization): void
+    {
+        $this->authorization = $authorization;
     }
 
     private function setEmail( string $email)
@@ -29,7 +43,7 @@ class User
         $this->email = $email;
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }

@@ -1,0 +1,153 @@
+/* LISTAGEM */
+
+main {
+  padding-top: 15vh;
+  border: solid 3px lawngreen;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.section-add-produto {
+  position: fixed;
+  border: crimson solid 3px;
+  z-index: 1;
+  top: 15vh;
+  height: 5vh;
+  width: 100%;
+}
+
+.section-a {
+  border: solid 3px darkmagenta;
+  right: 0;
+  display: flex;
+  align-items: center;
+}
+
+/*.filtros {*/
+/*  display: none;*/
+/*  flex-direction: column;*/
+/*  width: 20vw;*/
+/*  border: 1px solid lightgray;*/
+/*  padding: 1vh;*/
+/*  margin-top: 1vh;*/
+/*}*/
+
+/*.filtros-ul {*/
+/*  display: grid;*/
+/*}*/
+
+.lista-estoque {
+  /*background-color: olive;*/
+  width: 100%;
+  padding: 10vh;
+}
+
+.lista-estoque-ul {
+  border: yellow 3px solid;
+}
+
+.lista-estoque-li {
+  border: 1px solid black;
+  /*list-style-type: none;*/
+  /*display: flex;*/
+  /*flex-wrap: nowrap;*/
+  /*align-items: center;*/
+  /*justify-content: space-around;*/
+}
+
+.lista-estoque-div {
+  border: 2px solid gray;
+  margin: 1vh 0;
+  padding: 1vh 0;
+}
+
+.coluna {
+  border: violet 3px dashed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#coluna-produto {
+  width: 200px;
+}
+
+#coluna-qtd {
+  width: 120px;
+}
+
+#coluna-preco {
+  width: 100px;
+}
+
+#coluna-subcategoria {
+  width: 200px;
+}
+
+#coluna-categoria {
+  width: 200px;
+}
+
+#coluna-empty {
+  width: 70px;
+}
+
+#coluna-botao {
+  width: 70px;
+}
+
+#view-product {
+}
+
+.cabecalho {
+  background-color: var(--ciano);
+  color: var(--azul-escuro);
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.produtos {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.produtos .icon {
+  width: 1.5em;
+  height: auto;
+}
+
+.produtos:nth-child(even) {
+    background-color: var(--pessego);
+}
+
+
+#view-product {
+
+}
+
+
+
+/*.descricao {*/
+/*  display: flex;*/
+/*  justify-content: flex-start;*/
+/*}*/
+
+@media screen and (max-width: 500px) {
+
+}
+
+@media screen and (min-width: 501px) and (max-width: 1023px) {
+
+}
+
+@media screen and (min-width: 1024px) {
+ 
+}

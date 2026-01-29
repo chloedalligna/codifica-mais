@@ -23,6 +23,24 @@ class ProductRepository
         return $this->pdo;
     }
 
+    public function databaseToModel(array $productData): Product
+    {
+        $product =  new Product(
+                    $productData['nome_produto'],
+                    $this->getNameCategory($productData['id_categoria']),
+                    $this->getNameSubcategory($productData['id_subcategoria']),
+                    $productData['preco'],
+                    $productData['quantidade'],
+                    $productData['imagem_url'],
+                    $productData['descricao'],
+                    $productData['id_status']
+                    );
+
+        $product->setId($productData['id']);
+
+        return $product;
+    }
+
     public function listAllProducts(): array
     {
         $sql = 'SELECT * FROM produtos';
@@ -32,23 +50,12 @@ class ProductRepository
 
         return array_map(
             function ($productData) {
-                $product =  new Product(
-                    $productData['nome_produto'],
-                    $this->getNameCategory($productData['id_categoria']),
-                    $this->getNameSubcategory($productData['id_subcategoria']),
-                    $productData['preco'],
-                    $productData['quantidade'],
-                    $productData['imagem_url'],
-                    $productData['descricao'],
-                    $productData['id_status']
-                );
-                $product->setId($productData['id']);
-
-                return $product;
+                return $this->databaseToModel($productData);
             },
             $databaseProducts
         );
     }
+
     public function addProduct(Product $product): bool
     {
         $sql = 'INSERT INTO produtos (
@@ -82,6 +89,7 @@ class ProductRepository
         $statement->bindValue(':id_status', 1); // Definindo status padrão como 1 (ativo)
 
         $result = $statement->execute();
+
         if ($statement->rowCount() !== 1) {
             throw new \Exception('Falha ao cadastrar o produto no banco de dados.');
         }
@@ -129,33 +137,42 @@ class ProductRepository
         return $statement->execute();
     }
 
-    public function viewProduct(Product $product)
+    public function findById(int $id): Product
+    {
+        $sql = 'SELECT * FROM produtos WHERE id = ?';
+
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(1, $id, \PDO::PARAM_INT);
+
+        $statement->execute();
+
+        if ($statement->rowCount() !== 1) {
+            header('Location: /?erro=produto_inexistente');
+            exit();
+        }
+
+        $productData = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $this->databaseToModel($productData);
+    }
+
+    public function findByCategory(int $idCategory): array
     {
         $sql = 'SELECT * FROM produtos
-                WHERE id = :id';
+                WHERE id_categoria = :id_categoria';
 
-        $statement = $this->pdo->query($sql);
-        $databaseProduct = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(':id_categoria', $idCategory);
 
-        var_dump($databaseProduct);
-        exit();
+        $statement->execute();
+
+        $databaseProducts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         return array_map(
             function ($productData) {
-                $product =  new Product(
-                    $productData['nome_produto'],
-                    $this->getNameCategory($productData['id_categoria']),
-                    $this->getNameSubcategory($productData['id_subcategoria']),
-                    $productData['preco'],
-                    $productData['quantidade'],
-                    $productData['imagem_url'],
-                    $productData['descricao'],
-                    $productData['id_status']
-                );
-
-                return $product;
+                return $this->databaseToModel($productData);
             },
-            $databaseProduct
+            $databaseProducts
         );
     }
 
@@ -189,7 +206,7 @@ class ProductRepository
         return $databaseStatus;
     }
 
-    public function getCategoryFromSubcategory($subcategory): string
+    public function getCategoryFromSubcategory(string $subcategory): string
     {
         $idSub = $this->getIdSubcategory($subcategory);
 
@@ -205,7 +222,7 @@ class ProductRepository
         return $categoria;
     }
 
-    public function getNameCategory($idCategoria): string
+    public function getNameCategory(int $idCategoria): string
     {
         $sql = 'SELECT nome_categoria FROM categorias
                 WHERE id_categoria = :id_categoria';
@@ -218,11 +235,9 @@ class ProductRepository
         return $categoria;
     }
 
-    public function getIdCategory($categoria)
+    public function getIdCategory(string $categoria): int
     {
-        $sql = 'SELECT id_categoria FROM produtos p
-                JOIN subcategorias s ON p.id_categoria = s.id_categoria
-                JOIN categorias c ON s.id_categoria = c.id_categoria
+        $sql = 'SELECT id_categoria FROM categorias
                 WHERE nome_categoria = :categoria';
 
         $statement = $this->pdo->prepare($sql);
@@ -233,7 +248,7 @@ class ProductRepository
         return $idCategoria;
     }
 
-    public function getNameSubcategory($idSubcategoria): string
+    public function getNameSubcategory(int $idSubcategoria): string
     {
         $sql = 'SELECT nome_subcategoria FROM subcategorias
                 WHERE id_subcategoria = :id_subcategoria';
@@ -246,10 +261,9 @@ class ProductRepository
         return $subcategoria;
     }
 
-    public function getIdSubcategory($subcategoria)
+    public function getIdSubcategory(string $subcategoria): int
     {
-        $sql = 'SELECT id_subcategoria FROM produtos p
-                JOIN subcategorias s ON p.id_subcategoria = s.id_subcategoria
+        $sql = 'SELECT id_subcategoria FROM subcategorias
                 WHERE nome_subcategoria = :subcategoria';
 
         $statement = $this->pdo->prepare($sql);
@@ -260,7 +274,7 @@ class ProductRepository
         return $idSubcategoria;
     }
 
-    public function getIdStatus($nameStatus): string
+    public function getIdStatus(string $nameStatus): int
     {
         $sql = 'SELECT id_status FROM status_estoque
                 WHERE nome_status = :nome_status';
@@ -273,4 +287,17 @@ class ProductRepository
         return $idStatus;
     }
 
+    public function getNameStatus(int $idStatus): string
+    {
+        $sql = 'SELECT nome_status FROM status_estoque
+                WHERE id_status = :id_status';
+
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(':id_status', $idStatus);
+        $statement->execute();
+        $status = $statement->fetchColumn();
+
+        return $status;
+
+    }
 }

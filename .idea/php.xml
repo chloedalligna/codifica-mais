@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MessDetectorOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PHPCSFixerOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PHPCodeSnifferOptionsConfiguration">
+    <option name="highlightLevel" value="WARNING" />
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/PHP-ESTOQUE/vendor/fortawesome/font-awesome" />
+      <path value="$PROJECT_DIR$/PHP-ESTOQUE/vendor/composer" />
+      <path value="$PROJECT_DIR$/PHP-COMPOSER/PUPHPETEER/vendor/zoon/puphpeteer" />
+      <path value="$PROJECT_DIR$/PHP-COMPOSER/PUPHPETEER/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/PHP-COMPOSER/CARBON/vendor/psr/clock" />
+      <path value="$PROJECT_DIR$/PHP-COMPOSER/CARBON/vendor/symfony/polyfill-php83" />
+      <path value="$PROJECT_DIR$/PHP-COMPOSER/CARBON/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/PHP-COMPOSER/CARBON/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/PHP-COMPOSER/CARBON/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/PHP-COMPOSER/CARBON/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/PHP-COMPOSER/CARBON/vendor/symfony/clock" />
+      <path value="$PROJECT_DIR$/PHP-COMPOSER/CARBON/vendor/carbonphp/carbon-doctrine-types" />
+      <path value="$PROJECT_DIR$/PHP-COMPOSER/CARBON/vendor/composer" />
+      <path value="$PROJECT_DIR$/PHP-COMPOSER/CARBON/vendor/nesbot/carbon" />
+    </include_path>
+  </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.4">
+    <option name="suggestChangeDefaultLanguageLevel" value="false" />
+  </component>
+  <component name="PhpStanOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/PHP-COMPOSER/PUPHPETEER/vendor/autoload.php" />
+    </phpunit_settings>
+  </component>
+  <component name="PsalmOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+</project>

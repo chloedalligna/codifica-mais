@@ -4,6 +4,6 @@ namespace Chloe\PhpEstoque\Controller;
 
 interface Controller
 {
-    public function processaRequisicao(): void;
+    public function processRequest(): void;
 
 }

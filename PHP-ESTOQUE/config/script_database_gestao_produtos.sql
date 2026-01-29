@@ -32,6 +32,14 @@ CREATE TABLE IF NOT EXISTS status_estoque (
 	nome_status VARCHAR(40)
 );
 
+CREATE TABLE IF NOT EXISTS users (
+    id_user INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255),
+    email VARCHAR(255),
+    password VARCHAR(255),
+    authorization_level ARRAY<VARCHAR(100)>
+);
+
 ALTER TABLE produtos
 ADD COLUMN id_status INT REFERENCES status_estoque(id_status);
 

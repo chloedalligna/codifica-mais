@@ -4,9 +4,8 @@ namespace Chloe\PhpEstoque\Controller;
 
 use Chloe\PhpEstoque\Entity\Product;
 use Chloe\PhpEstoque\Repository\ProductRepository;
-use Controller;
 
-class AddController implements Controller
+class ProductAddController implements Controller
 {
     private ProductRepository $repository;
     public function __construct($repository)
@@ -14,35 +13,35 @@ class AddController implements Controller
         $this->repository = $repository;
     }
 
-    public function processaRequisicao(): void
+    public function processRequest(): void
     {
         $nameProduct = filter_input(INPUT_POST, 'nameProduct', FILTER_SANITIZE_STRING);
-        if (!$nameProduct) {
-            header('Location: /index.php?erro=nome_produto_invalido');
+        if ($nameProduct === false || $nameProduct === null) {
+            header('Location: /?erro=nome_produto_invalido');
             exit();
         }
 
         $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
-        if (!$price) {
-            header('Location: /index.php?erro=preco_produto_invalido');
+        if ($price === false || $price === null) {
+            header('Location: /?erro=preco_produto_invalido');
             exit();
         }
 
         $quantity = filter_input(INPUT_POST, 'quantity', FILTER_VALIDATE_INT);
-        if (!$quantity) {
-            header('Location: /index.php?erro=quantidade_produto_invalido');
+        if ($quantity === false || $quantity === null) {
+            header('Location: /?erro=quantidade_produto_invalido');
             exit();
         }
 
         $imageUrl = filter_input(INPUT_POST, 'imageUrl', FILTER_SANITIZE_URL);
-        if (!$imageUrl) {
-            header('Location: /index.php?erro=imagemUrl_produto_invalido');
+        if ($imageUrl === false || $imageUrl === null) {
+            header('Location: /?erro=imagemUrl_produto_invalido');
             exit();
         }
 
         $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
-        if (!$description) {
-            header('Location: /index.php?erro=descricao_produto_invalido');
+        if ($description === false || $description === null) {
+            header('Location: /?erro=descricao_produto_invalido');
             exit();
         }
         if (isset($_POST['cadastro'])){
@@ -64,10 +63,10 @@ class AddController implements Controller
             $result = $this->repository->addProduct($product);
 
             if ($result === false) {
-                header('Location: /index.php?erro=falha_cadastro');
+                header('Location: /?erro=falha_cadastro');
 
             } else {
-                header('Location: /index.php?sucesso=produto_cadastrado');
+                header('Location: /?sucesso=produto_cadastrado');
             }
 
         }

@@ -12,18 +12,34 @@ $repository = new ProductRepository($pdo);
 
 $routes = require_once __DIR__ . "/../config/routes.php";
 
-$path_info = $_SERVER['PATH_INFO'] ?? '/';
+$pathInfo = $_SERVER['PATH_INFO'] ?? '/';
 $httpMethod = $_SERVER['REQUEST_METHOD'];
 
-$key = $routes[$httpMethod][$path_info];
+session_start();
+$routeLogin = ($pathInfo === '/login');
+if (!array_key_exists('logado', $_SESSION) && !$routeLogin) {
+    header('Location: /login');
+}
 
-if (array_key_exists($key, $routes)) {
-    $controllerClass = $routes[$httpMethod][$path_info];
+$mainKey = "$httpMethod";
+$secondaryKey = "$pathInfo";
+
+if (array_key_exists($mainKey, $routes) && array_key_exists($secondaryKey, $routes[$mainKey])) {
+    $controllerClass = $routes[$mainKey][$secondaryKey];
     $controller = new $controllerClass($repository);
-
 } else {
-    $controllerClass = new Error404Controller();
+    $controller = new Error404Controller();
 }
 
 /** @var Controller $controller */
-$controller->processaRequisicao();
+$controller->processRequest();
+
+//$key = "$httpMethod|$path_info";
+
+//if (array_key_exists($key, $routes)) {
+//    $controllerClass = $routes["$httpMethod|$path_info"];
+//    $controllerClass = $routes[$key];
+//    $controller = new $controllerClass($repository);
+//} else {
+//    $controller = new Error404Controller();
+//}
