@@ -40,7 +40,7 @@
 <!--                            <picture>-->
 <!--                                <source srcset=".\assets\2-removebg-2.png" media="(max-width: 790px)">-->
 <!--                                <source srcset=".\assets\1-removebg-1.png" media="(min-width: 1024px)">-->
-                                <img class="logo" src=".\assets\2-removebg-2.png" alt="logo">
+                            <img class="logo" src=".\assets\2-removebg-2.png" alt="logo">
 <!--                            </picture>-->
                         </a>
                     </div>
@@ -55,12 +55,11 @@
                 </li>
                 <li class="nav-li nav-login">
                     <div class="nav-li-div login-div">
-                        <button class="login-botao button">
-                            LOGIN
-                        </button>
-<!--                        <a href="" class="login-avatar">-->
-<!--                            ICONE-->
-<!--                        </a>-->
+                        <a href="/logout" class="nav-login-botao">
+                            <button class="login-botao button" >
+                                LOGOUT
+                            </button>
+                        </a>
                     </div>
                 </li>
             </ul>

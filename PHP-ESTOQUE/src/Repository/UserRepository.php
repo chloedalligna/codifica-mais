@@ -68,15 +68,16 @@ class UserRepository
 
         $statement = $this->pdo->prepare($sql);
 
-        $statement->bindValue(':username', $user->getNameProduct());
-        $statement->bindValue(':email', $user->getIdCategory());
-        $statement->bindValue(':password', $user->getIdSubcategory());
-        $statement->bindValue(':authorization_level', $user->getPrice());
+        $statement->bindValue(':username', $user->getUsername());
+        $statement->bindValue(':email', $user->getEmail());
+        $statement->bindValue(':password', $user->getPassword());
+        $statement->bindValue(':authorization_level', $user->getAuthorization());
 
         $result = $statement->execute();
 
         if ($statement->rowCount() !== 1) {
-            throw new \Exception('Falha ao cadastrar o produto no banco de dados.');
+            header('Location: /signup?erro=falha_cadastro_usuario');
+            exit();
         }
 
         $id = $this->pdo->lastInsertId();
@@ -85,42 +86,42 @@ class UserRepository
         return $result;
     }
 
-    public function deleteProduct($id): bool
-    {
-        $sql = 'DELETE FROM produtos WHERE id = :id';
-        $statement = $this->pdo->prepare($sql);
-        $statement->bindValue(':id', $id);
+//    public function deleteProduct($id): bool
+//    {
+//        $sql = 'DELETE FROM produtos WHERE id = :id';
+//        $statement = $this->pdo->prepare($sql);
+//        $statement->bindValue(':id', $id);
+//
+//        return $statement->execute();
+//    }
 
-        return $statement->execute();
-    }
-
-    public function updateProduct(Product $product): bool
-    {
-        $sql = 'UPDATE produtos
-                SET nome_produto = :nome_produto,
-                    id_categoria = :id_categoria,
-                    id_subcategoria = :id_subcategoria,
-                    preco = :preco,
-                    quantidade = :quantidade,
-                    imagem_url = :imagem_url,
-                    descricao = :descricao,
-                    id_status = :id_status
-                WHERE id = :id';
-
-        $statement = $this->pdo->prepare($sql);
-
-        $statement->bindValue(':nome_produto', $product->getNameProduct());
-        $statement->bindValue(':id_categoria', $product->getIdCategory());
-        $statement->bindValue(':id_subcategoria', $product->getIdSubcategory());
-        $statement->bindValue(':preco', $product->getPrice());
-        $statement->bindValue(':quantidade', $product->getQuantity());
-        $statement->bindValue(':imagem_url', $product->getImageUrl());
-        $statement->bindValue(':descricao', $product->getDescription());
-        $statement->bindValue(':id_status', $product->getIdStatus());
-        $statement->bindValue(':id', $product->getId(), PDO::PARAM_INT);
-
-        return $statement->execute();
-    }
+//    public function updateProduct(Product $product): bool
+//    {
+//        $sql = 'UPDATE produtos
+//                SET nome_produto = :nome_produto,
+//                    id_categoria = :id_categoria,
+//                    id_subcategoria = :id_subcategoria,
+//                    preco = :preco,
+//                    quantidade = :quantidade,
+//                    imagem_url = :imagem_url,
+//                    descricao = :descricao,
+//                    id_status = :id_status
+//                WHERE id = :id';
+//
+//        $statement = $this->pdo->prepare($sql);
+//
+//        $statement->bindValue(':nome_produto', $product->getNameProduct());
+//        $statement->bindValue(':id_categoria', $product->getIdCategory());
+//        $statement->bindValue(':id_subcategoria', $product->getIdSubcategory());
+//        $statement->bindValue(':preco', $product->getPrice());
+//        $statement->bindValue(':quantidade', $product->getQuantity());
+//        $statement->bindValue(':imagem_url', $product->getImageUrl());
+//        $statement->bindValue(':descricao', $product->getDescription());
+//        $statement->bindValue(':id_status', $product->getIdStatus());
+//        $statement->bindValue(':id', $product->getId(), PDO::PARAM_INT);
+//
+//        return $statement->execute();
+//    }
 
     public function findById(int $id): User
     {
@@ -141,7 +142,7 @@ class UserRepository
         return $this->databaseToModel($userData);
     }
 
-    public function authenticateUser($email, $password)
+    public function authenticateUser($email, $password): User
     {
         $sql = 'SELECT * FROM users 
                 WHERE email = :email';
@@ -152,15 +153,27 @@ class UserRepository
 
         $userData = $statement->fetch(PDO::FETCH_ASSOC);
 
-        $correctPassword = password_verify($password, $userData['password']);
+        $correctPassword = $password == $userData['password'];
+
+//        echo "<pre>";
+//
+//        var_dump($_POST, $correctPassword, $userData, $password);
+//
+//        echo "</pre>";
+//        die();
+
+
 
         if ($correctPassword) {
-            header('Location: /');
-            return $correctPassword;
+            $_SESSION['email'] = $email;
+            $_SESSION['logado'] = true;
+            header('Location: /?sucesso=usuario_logado');
+            exit();
         } else {
             header('Location: /login?erro=credenciais_invalidas');
-            return $correctPassword;
+            exit();
         }
+
 
     }
 

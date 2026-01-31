@@ -1,39 +1,41 @@
 <?php
 
 
-require_once __DIR__ . "/header.php";
+require_once __DIR__ . "/header-login.php";
 
 
 ?>
 
 <main class="main-login">
 
-    <form class="formulario">
+    <form class="formulario"
+    method="post"
+    action="/signup">
 
         <section class="formulario-titulo">
             <h2>Signup</h2>
         </section>
 
             <div class="formulario-div">
-                <label class="formulario-label" for="usuario">Usuário</label>
-                <input name="user" class="formulario-input" required
-                       placeholder="Digite seu nome de usuário" id='usuario' />
+                <label class="formulario-label" for="username">Usuário</label>
+                <input name="username" class="formulario-input" required
+                       placeholder="Digite seu nome de usuário" id='username' />
             </div>
 
             <div class="formulario-div">
                 <label class="formulario-label" for="email">E-mail</label>
-                <input name="email" class="formulario-input" required
+                <input type="email" name="email" class="formulario-input" required
                        placeholder="Digite seu e-mail" id='email' />
             </div>
 
             <div class="formulario-div">
-                <label class="formulario-label" for="senha">Senha</label>
-                <input type="password" name="senha" class="formulario-input" required placeholder="Digite sua senha"
-                       id='senha' />
+                <label class="formulario-label" for="password">Senha</label>
+                <input type="password" name="password" class="formulario-input" required placeholder="Digite sua senha"
+                       id='password' />
             </div>
 
         <div class="formulario-botao">
-            <input name="signup" class="formulario-post" type="submit" value="Criar conta" />
+            <input class="formulario-post" type="submit" value="CRIAR CONTA" />
         </div>
     </form>
 

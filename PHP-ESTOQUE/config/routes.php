@@ -2,26 +2,27 @@
 
 return [
     'GET' => [
-        '/' => \Chloe\PhpEstoque\Controller\ProductListController::class,
-        '/cadastro' => \Chloe\PhpEstoque\Controller\AddProductFormController::class,
-        '/edicao' => \Chloe\PhpEstoque\Controller\UpdateProductFormController::class,
-        '/exclusao' => \Chloe\PhpEstoque\Controller\ProductDeleteController::class,
-        '/login' => \Chloe\PhpEstoque\Controller\LoginFormController::class,
-        '/signup' => \Chloe\PhpEstoque\Controller\SignupFormController::class,
+        '/' => \Chloe\PhpEstoque\Controller\Product\ListProductController::class,
+        '/cadastro' => \Chloe\PhpEstoque\Controller\Product\CreateFormProductController::class,
+        '/edicao' => \Chloe\PhpEstoque\Controller\Product\UpdateFormProductController::class,
+        '/exclusao' => \Chloe\PhpEstoque\Controller\Product\DeleteProductController::class,
+        '/login' => \Chloe\PhpEstoque\Controller\UserLogin\LoginFormController::class,
+        '/signup' => \Chloe\PhpEstoque\Controller\UserLogin\SignupFormController::class,
+        '/logout' => \Chloe\PhpEstoque\Controller\UserLogin\LogoutController::class,
     ],
     'POST' => [
-        '/cadastro' => \Chloe\PhpEstoque\Controller\ProductAddController::class,
-        '/edicao' => \Chloe\PhpEstoque\Controller\ProductUpdateController::class,
-        '/login' => \Chloe\PhpEstoque\Controller\LoginController::class,
-        '/signup' => \Chloe\PhpEstoque\Controller\SignupController::class,
+        '/cadastro' => \Chloe\PhpEstoque\Controller\Product\CreateProductController::class,
+        '/edicao' => \Chloe\PhpEstoque\Controller\Product\UpdateProductController::class,
+        '/login' => \Chloe\PhpEstoque\Controller\UserLogin\LoginController::class,
+        '/signup' => \Chloe\PhpEstoque\Controller\UserLogin\SignupController::class,
     ],
 ];
 
 //return [
-//    'GET|/' => \Chloe\PhpEstoque\Controller\ProductListController::class,
-//    'GET|/cadastro' => \Chloe\PhpEstoque\Controller\UpdateProductFormController::class,
-//    'GET|/edicao' => \Chloe\PhpEstoque\Controller\UpdateProductFormController::class,
-//    'POST|/cadastro' => \Chloe\PhpEstoque\Controller\ProductListController::class,
-//    'POST|/edicao' => \Chloe\PhpEstoque\Controller\ProductListController::class,
-//    'POST|/exclusao' => \Chloe\PhpEstoque\Controller\ProductDeleteController::class,
+//    'GET|/' => \Chloe\PhpEstoque\Controller\ListProductController::class,
+//    'GET|/cadastro' => \Chloe\PhpEstoque\Controller\UpdateFormProductController::class,
+//    'GET|/edicao' => \Chloe\PhpEstoque\Controller\UpdateFormProductController::class,
+//    'POST|/cadastro' => \Chloe\PhpEstoque\Controller\ListProductController::class,
+//    'POST|/edicao' => \Chloe\PhpEstoque\Controller\ListProductController::class,
+//    'POST|/exclusao' => \Chloe\PhpEstoque\Controller\DeleteProductController::class,
 //];

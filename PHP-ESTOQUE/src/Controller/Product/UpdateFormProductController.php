@@ -1,16 +1,15 @@
 <?php
 
-namespace Chloe\PhpEstoque\Controller;
+namespace Chloe\PhpEstoque\Controller\Product;
 
 use Alura\Mvc\Entity\Video;
-use Chloe\PhpEstoque\Entity\Product;
+use Chloe\PhpEstoque\Controller\Controller;
 use Chloe\PhpEstoque\Repository\ProductRepository;
-use PDO;
 
-class UpdateProductFormController implements Controller
+class UpdateFormProductController implements Controller
 {
     private ProductRepository $repository;
-    public function __construct($repository)
+    public function __construct(ProductRepository $repository)
     {
         $this->repository = $repository;
     }

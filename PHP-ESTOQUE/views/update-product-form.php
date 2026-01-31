@@ -88,18 +88,18 @@ require_once __DIR__ . "/header.php";
                        value="<?= $product->getImageUrl() ?>">
             </div>
 
-            <div class="container-radio">
-                <?php foreach($listStatus as $key => $status): ?>
-                    <div>
-                        <label class="formulario-label" for="<?= $status['nome_status'] ?>" > <?= $status['nome_status'] ?> </label>
-                        <input name="nameStatus"
-                               class="formulario-input"
-                               type="radio"
-                               id="<?= $status['nome_status'] ?>"
-                                <?= $product->getIdStatus() === $status['id_status'] ? "checked" : "" ?> >
-                    </div>
-                <?php endforeach; ?>
-            </div>
+<!--            <div class="container-radio">-->
+<!--                --><?php //foreach($listStatus as $key => $status): ?>
+<!--                    <div>-->
+<!--                        <label class="formulario-label" for="--><?php //= $status['nome_status'] ?><!--" > --><?php //= $status['nome_status'] ?><!-- </label>-->
+<!--                        <input name="nameStatus"-->
+<!--                               class="formulario-input"-->
+<!--                               type="radio"-->
+<!--                               id="--><?php //= $status['nome_status'] ?><!--"-->
+<!--                                --><?php //= $product->getIdStatus() === $status['id_status'] ? "checked" : "" ?><!-- >-->
+<!--                    </div>-->
+<!--                --><?php //endforeach; ?>
+<!--            </div>-->
 
             <div class="formulario-botao">
                 <input name="edicao" class="formulario-post" type="submit" value="Editar produto" />

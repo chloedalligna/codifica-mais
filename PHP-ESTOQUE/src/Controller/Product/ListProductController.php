@@ -1,13 +1,14 @@
 <?php
 
-namespace Chloe\PhpEstoque\Controller;
+namespace Chloe\PhpEstoque\Controller\Product;
 
+use Chloe\PhpEstoque\Controller\Controller;
 use Chloe\PhpEstoque\Repository\ProductRepository;
 
-class ProductListController implements Controller
+class ListProductController implements Controller
 {
     private ProductRepository $repository;
-    public function __construct($repository)
+    public function __construct(ProductRepository $repository)
     {
         $this->repository = $repository;
     }

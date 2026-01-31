@@ -4,47 +4,43 @@ namespace Chloe\PhpEstoque\Entity;
 
 class Product
 {
+    // ATRIBUTOS
     private int $id;
+    private string $name;
+    private string $categoryId; // product data no banco de dados
+    private string $subcategoryId; // product data no banco de dados
 
-    private string $nameProduct;
-
-    private string $idCategory;
-
-    private string $idSubcategory;
-
-    private string $nameCategory;
-
-    private string $nameSubcategory;
-
-    private float $price;
-
+//    private string $categoryName;
+//    private string $subcategoryName;
     private int $quantity;
-
-    private string $imageUrl;
-
+    private float $price;
     private string $description;
-    
-    private int $idStatus;
+    private string $imagePath;
+    private int $statusId; // product data no banco de dados
 
-    public function __construct(string $nameProduct, string $nameCategory, string $nameSubcategory, float $price, int $quantity, string $imageUrl, string $description, $idStatus)
+//    private int $statusName;
+
+    // CONSTRUTOR
+    public function __construct(string $name, string $categoryId, string $subcategoryId, int $quantity, float $price, string $description, ?string $imagePath, int $statusId = null)
     {
-        $this->nameProduct = $nameProduct;
-        $this->setIdCategory($nameCategory);
-        $this->setIdSubcategory($nameSubcategory);
-        $this->nameCategory = $nameCategory;
-        $this->nameSubcategory = $nameSubcategory;
+        $this->name = $name;
+        $this->categoryId = $categoryId;
+        $this->subcategoryId = $subcategoryId;
+        $this->setQuantity($quantity);
         $this->price = $price;
-        $this->quantity = $quantity;
-        $this->imageUrl = $imageUrl;
         $this->description = $description;
-        $this->idStatus = $idStatus;
+        $this->imagePath = $imagePath;
 
-        if ($quantity < 0) {
-            $this->quantity = 1;
+        if ( $statusId === null) {
+            $this->setStatusId($quantity); // define statusId com base na quantidade
+        } else {
+            $this->statusId = $statusId;
         }
-
+//        $this->setIdCategory($nameCategory);
+//        $this->setIdSubcategory($nameSubcategory);
     }
 
+    // GETTERS E SETTERS
     public function setId(int $id): void
     {
         $this->id = $id;
@@ -55,62 +51,28 @@ class Product
         return $this->id;
     }
 
-    public function getNameProduct(): string
+    public function getName(): string
     {
-        return $this->nameProduct;
+        return $this->name;
     }
 
-    public function setNameCategory(int $idCategory): void
+    public function getCategoryId(): int
     {
-        $productRepository = new \Chloe\PhpEstoque\Repository\ProductRepository();
-        $nameCategory = $productRepository->getNameCategory($idCategory);
-        $this->nameCategory = $nameCategory;
+        return $this->categoryId;
     }
 
-    public function getNameCategory(): string
+    public function getSubcategoryId(): int
     {
-        return $this->nameCategory;
+        return $this->subcategoryId;
     }
 
-    public function setNameSubcategory(int $idSubcategory): void
+    public function setQuantity(int $quantity): void
     {
-        $productRepository = new \Chloe\PhpEstoque\Repository\ProductRepository();
-        $nameSubcategory = $productRepository->getNameSubcategory($idSubcategory);
-        $this->nameSubcategory = $nameSubcategory;
-    }
+        if ($quantity < 0) {
+            $quantity = 0;
+        }
 
-    public function getNameSubcategory(): string
-    {
-        return $this->nameSubcategory;
-    }
-
-    public function setIdCategory(string $nameCategory): void
-    {
-        $productRepository = new \Chloe\PhpEstoque\Repository\ProductRepository();
-        $idCategory = $productRepository->getIdCategory($nameCategory);
-        $this->idCategory = $idCategory;
-    }
-
-    public function getIdCategory(): int
-    {
-        return $this->idCategory;
-    }
-
-    public function setIdSubcategory(string $nameSubcategory): void
-    {
-        $productRepository = new \Chloe\PhpEstoque\Repository\ProductRepository();
-        $idSubcategory = $productRepository->getIdSubcategory($nameSubcategory);
-        $this->idSubcategory = $idSubcategory;
-    }
-
-    public function getIdSubcategory(): int
-    {
-        return $this->idSubcategory;
-    }
-
-    public function getPrice(): float
-    {
-        return $this->price;
+        $this->quantity = $quantity;
     }
 
     public function getQuantity(): int
@@ -118,20 +80,38 @@ class Product
         return $this->quantity;
     }
 
-    public function getImageUrl(): int
+    public function getPrice(): float
     {
-        return $this->imageUrl;
+        return $this->price;
     }
 
-    public function getDescription(): int
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    public function getIdStatus(): int
+    public function getImagePath(): string
     {
-        return $this->idStatus;
+        return $this->imagePath;
     }
 
+    private function setStatusId(int $quantity): void
+    {
+        if ($quantity == 0) {
+            $this->statusId = 2; // Esgotado
+
+        } elseif ($quantity == 1) {
+            $this->statusId = 3; // Última Unidade
+
+        } else {
+            $this->statusId = 1; // Disponível
+
+        }
+    }
+
+    public function getStatusId(): int
+    {
+        return $this->statusId;
+    }
 
 }

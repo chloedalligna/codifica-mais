@@ -56,29 +56,38 @@ require_once __DIR__ . "/header.php";
                         </span>
                     </div>
                 </li>
+
+                    <div class="modal">
+                        <div class="view-produto">
+                            <div class="view-produto-content">
+                                <div class="view-nome">
+                                    <h2><?= $product->getNameProduct() ?></h2>
+                                </div>
+                                <div class="view-div">
+                                    <ul class="view-ul">
+                                        <li>
+                                            <?= $product->getImageUrl(); ?>
+                                        </li>
+                                        <li>
+                                            <?= $product->getQuantity(); ?>
+                                        </li>
+                                        <li>
+                                            <?= $product->getNameSubcategory(); ?>
+                                        </li>
+                                        <li>
+                                            <?= $product->getNameCategory(); ?>
+                                        </li>
+                                        <li>
+                                            <?= $product->getPrice(); ?>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 <?php endforeach; ?>
             </ul>
-        </div>
-
-        <div class="modal">
-            <div class="view-produto">
-                <div class="view-produto-content">
-                    <div class="view-nome">
-                        <h2><?= $product->getNameProduct()?></h2>
-                    </div>
-                    <div class="menu-lateral-div">
-                        <ul class="menu-lateral-ul">
-                            <?= $product->getImageUrl();
-                            $product->getQuantity();
-                            $product->getNameSubcategory();
-                            $product->getNameCategory();
-                            $product->getPrice();
-                            $product->getDescription();
-                            $product->getIdStatus()?>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
 
     </main>

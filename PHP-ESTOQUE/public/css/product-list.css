@@ -2,7 +2,7 @@
 
 main {
   padding-top: 15vh;
-  border: solid 3px lawngreen;
+  /*border: solid 3px lawngreen;*/
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,19 +26,6 @@ main {
   display: flex;
   align-items: center;
 }
-
-/*.filtros {*/
-/*  display: none;*/
-/*  flex-direction: column;*/
-/*  width: 20vw;*/
-/*  border: 1px solid lightgray;*/
-/*  padding: 1vh;*/
-/*  margin-top: 1vh;*/
-/*}*/
-
-/*.filtros-ul {*/
-/*  display: grid;*/
-/*}*/
 
 .lista-estoque {
   /*background-color: olive;*/

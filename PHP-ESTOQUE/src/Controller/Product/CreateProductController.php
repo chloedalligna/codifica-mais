@@ -1,14 +1,15 @@
 <?php
 
-namespace Chloe\PhpEstoque\Controller;
+namespace Chloe\PhpEstoque\Controller\Product;
 
+use Chloe\PhpEstoque\Controller\Controller;
 use Chloe\PhpEstoque\Entity\Product;
 use Chloe\PhpEstoque\Repository\ProductRepository;
 
-class ProductAddController implements Controller
+class CreateProductController implements Controller
 {
     private ProductRepository $repository;
-    public function __construct($repository)
+    public function __construct(ProductRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -48,7 +49,7 @@ class ProductAddController implements Controller
 
             $nameSubcategory = $_POST['nameSubcategory'];
             $nameCategory = $this->repository->getCategoryFromSubcategory($_POST['nameSubcategory']);
-            $idStatus = $this->repository->getIdStatus($_POST['nameStatus']);
+//            $idStatus = $this->repository->getIdStatus($_POST['nameStatus']);
 
             $product = new Product(
                 $nameProduct,
@@ -57,8 +58,7 @@ class ProductAddController implements Controller
                 $price,
                 $quantity,
                 $imageUrl,
-                $description,
-                $idStatus);
+                $description);
 
             $result = $this->repository->addProduct($product);
 
