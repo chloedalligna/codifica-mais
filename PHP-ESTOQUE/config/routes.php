@@ -3,20 +3,22 @@
 return [
     'GET' => [
         '/' => \Chloe\PhpEstoque\Controller\Product\ListProductController::class,
-        '/cadastro' => \Chloe\PhpEstoque\Controller\Product\CreateFormProductController::class,
-        '/edicao' => \Chloe\PhpEstoque\Controller\Product\UpdateFormProductController::class,
-        '/exclusao' => \Chloe\PhpEstoque\Controller\Product\DeleteProductController::class,
+        '/create' => \Chloe\PhpEstoque\Controller\Product\CreateFormProductController::class,
+        '/update' => \Chloe\PhpEstoque\Controller\Product\UpdateFormProductController::class,
+        '/products/delete' => \Chloe\PhpEstoque\Controller\Product\DeleteProductController::class,
         '/login' => \Chloe\PhpEstoque\Controller\UserLogin\LoginFormController::class,
         '/signup' => \Chloe\PhpEstoque\Controller\UserLogin\SignupFormController::class,
         '/logout' => \Chloe\PhpEstoque\Controller\UserLogin\LogoutController::class,
     ],
     'POST' => [
-        '/cadastro' => \Chloe\PhpEstoque\Controller\Product\CreateProductController::class,
-        '/edicao' => \Chloe\PhpEstoque\Controller\Product\UpdateProductController::class,
+        '/create' => \Chloe\PhpEstoque\Controller\Product\CreateProductController::class,
+        '/update' => \Chloe\PhpEstoque\Controller\Product\UpdateProductController::class,
         '/login' => \Chloe\PhpEstoque\Controller\UserLogin\LoginController::class,
         '/signup' => \Chloe\PhpEstoque\Controller\UserLogin\SignupController::class,
     ],
 ];
+
+// ESCRITA ALTERNATIVA PARA ACESSAR AS ROTAS
 
 //return [
 //    'GET|/' => \Chloe\PhpEstoque\Controller\ListProductController::class,

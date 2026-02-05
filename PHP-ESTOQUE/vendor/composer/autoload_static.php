@@ -6,10 +6,16 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit532120e7b5530d9c20540bbca44e26e6
 {
+    public static $files = array (
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
-        'K' => 
+        'S' => 
         array (
-            'Khill\\FontAwesome\\' => 18,
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Component\\VarDumper\\' => 28,
         ),
         'C' => 
         array (
@@ -18,9 +24,13 @@ class ComposerStaticInit532120e7b5530d9c20540bbca44e26e6
     );
 
     public static $prefixDirsPsr4 = array (
-        'Khill\\FontAwesome\\' => 
+        'Symfony\\Polyfill\\Mbstring\\' => 
         array (
-            0 => __DIR__ . '/..' . '/khill/fontawesomephp/src',
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Component\\VarDumper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/var-dumper',
         ),
         'Chloe\\PhpEstoque\\' => 
         array (

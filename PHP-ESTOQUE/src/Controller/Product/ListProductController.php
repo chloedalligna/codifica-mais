@@ -3,30 +3,31 @@
 namespace Chloe\PhpEstoque\Controller\Product;
 
 use Chloe\PhpEstoque\Controller\Controller;
+use Chloe\PhpEstoque\Entity\Product;
 use Chloe\PhpEstoque\Repository\ProductRepository;
 
 class ListProductController implements Controller
 {
-    private ProductRepository $repository;
-    public function __construct(ProductRepository $repository)
+    private ProductRepository $productRepository;
+
+    public function __construct(ProductRepository $productRepository)
     {
-        $this->repository = $repository;
+        $this->productRepository = $productRepository;
     }
 
     public function processRequest(): void
     {
-        $databaseSubcategorias = $this->repository->listSubcategories();
-
-        $idCategoria = filter_input(INPUT_GET, 'categoria', FILTER_VALIDATE_INT);
-
-        if ($idCategoria === false || $idCategoria === null) {
-            $products = $this->repository->listAllProducts();
+        // REQUISIÇÕES HEADER
+        $categoryId = filter_input(INPUT_GET, 'category', FILTER_VALIDATE_INT);
+        if ($categoryId === false || $categoryId === null) {
+            $products = $this->productRepository->listAll();
         } else {
-            $products = $this->repository->findByCategory($idCategoria);
+            $products = $this->productRepository->findByCategory($categoryId);
         }
+        $listCategories = $this->productRepository->listCategories();
+        // FIM REQUISIÇÕES HEADER
 
-        $databaseCategorias = $this->repository->listCategories();
-        require_once __DIR__ . "/../../views/product-list.php";
+        require_once __DIR__ . "/../../../views/Product/list-product.php";
     }
 }
 

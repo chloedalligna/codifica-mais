@@ -23,7 +23,7 @@ class ProductRepository
 //        return $this->pdo;
 //    }
 
-    // READ
+    // READ ALL
     public function listAll(): array
     {
         $sql = 'SELECT * FROM products';
@@ -33,7 +33,7 @@ class ProductRepository
 
         return array_map(
             function ($oneProductData) {
-                return $this->databaseToModel($oneProductData);
+                return $this->dataToModel($oneProductData);
             },
             $productsData
         );
@@ -48,7 +48,7 @@ class ProductRepository
                       subcategory_id,
                       quantity,
                       price,
-                      description
+                      description,
                       image_path,
                       status_id)
                 VALUES (
@@ -59,7 +59,13 @@ class ProductRepository
                         :price,
                         :description,
                         :image_path,
-                        :status_id) ';
+                        :status_id)';
+
+//        $sql2 = 'IF EXISTS (SELECT product, c, CONSTRAINT_NAME, REFERENCED_TABLE_NAME, REFERENCED_COLUMN_NAME
+//        FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+//        WHERE REFERENCED_TABLE_NAME = referenceTableName AND TABLE_SCHEMA  = schemaName AND TABLE_NAME = mainTableName AND CONSTRAINT_NAME = constraintName
+//
+//        END IF';
 
         $statement = $this->pdo->prepare($sql);
 
@@ -76,9 +82,8 @@ class ProductRepository
 
         if ($statement->rowCount() !== 1) {
             // FIRE ALARM JAVASCRIPT
-            header('Location: /?error=row-count-not-1');
+            header('Location: /?error=create-row-count-not-1');
             exit();
-//            throw new \Exception('Falha ao cadastrar o produto no banco de dados.');
         }
 
         $id = $this->pdo->lastInsertId();
@@ -99,7 +104,6 @@ class ProductRepository
                     price = :price,
                     description = :description,
                     image_path = :image_path
-                    status_id = :status_id
                 WHERE id = :id';
 
         $statement = $this->pdo->prepare($sql);
@@ -111,10 +115,17 @@ class ProductRepository
         $statement->bindValue(':price', $product->getPrice());
         $statement->bindValue(':description', $product->getDescription());
         $statement->bindValue(':image_path', $product->getImagePath());
-        $statement->bindValue(':status_id', $product->getStatusId());
         $statement->bindValue(':id', $product->getId(), PDO::PARAM_INT);
 
-        return $statement->execute();
+        $success = $statement->execute();
+
+        if ($statement->rowCount() !== 1) {
+            // FIRE ALARM JAVASCRIPT
+            header('Location: /?error=update-row-count-not-1');
+            exit();
+        }
+
+        return $success;
     }
 
     // DELETE
@@ -130,193 +141,167 @@ class ProductRepository
     }
 
     // MAPPER
-    public function databaseToModel(array $productData): Product
+    private function dataToModel(array $productData): Product
     {
         $product =  new Product(
-                    $productData['name'],
-                    $productData['category_id'],
-                    $productData['subcategory_id'],
-                    $productData['quantity'],
-                    $productData['price'],
-                    $productData['description'],
-                    $productData['image_path'],
-//                    $productData['status_id']
-                    );
+            $productData['name'],
+            $productData['category_id'],
+            $productData['subcategory_id'],
+            $productData['quantity'],
+            $productData['price'],
+            $productData['description'],
+            $productData['image_path'],
+            $productData['status_id']
+        );
 
         $product->setId($productData['id']);
 
         return $product;
     }
-//
-//
-//
-//
-//
 
-//
-//
-//
-//    public function findById(int $id): Product
-//    {
-//        $sql = 'SELECT * FROM produtos WHERE id = ?';
-//
-//        $statement = $this->pdo->prepare($sql);
-//        $statement->bindValue(1, $id, \PDO::PARAM_INT);
-//
-//        $statement->execute();
-//
-//        if ($statement->rowCount() !== 1) {
-//            header('Location: /?erro=produto_inexistente');
-//            exit();
-//        }
-//
-//        $productData = $statement->fetchAll(PDO::FETCH_ASSOC);
-//
-//        return $this->databaseToModel($productData);
-//    }
-//
-//    public function findByCategory(int $idCategory): array
-//    {
-//        $sql = 'SELECT * FROM produtos
-//                WHERE id_categoria = :id_categoria';
-//
-//        $statement = $this->pdo->prepare($sql);
-//        $statement->bindValue(':id_categoria', $idCategory);
-//
-//        $statement->execute();
-//
-//        $databaseProducts = $statement->fetchAll(PDO::FETCH_ASSOC);
-//
-//        return array_map(
-//            function ($productData) {
-//                return $this->databaseToModel($productData);
-//            },
-//            $databaseProducts
-//        );
-//    }
-//
-//    public function listCategories(): array
-//    {
-//        $sql = 'SELECT * FROM categorias';
-//
-//        $statement = $this->pdo->query($sql);
-//        $databaseCategorias = $statement->fetchAll(PDO::FETCH_ASSOC);
-//
-//        return $databaseCategorias;
-//    }
-//
-//    public function listSubcategories(): array
-//    {
-//        $sql = 'SELECT * FROM subcategorias';
-//
-//        $statement = $this->pdo->query($sql);
-//        $databaseSubcategorias = $statement->fetchAll(PDO::FETCH_ASSOC);
-//
-//        return $databaseSubcategorias;
-//    }
-//
-//    public function listStatus(): array
-//    {
-//        $sql = 'SELECT * FROM status_estoque';
-//
-//        $statement = $this->pdo->query($sql);
-//        $databaseStatus = $statement->fetchAll(PDO::FETCH_ASSOC);
-//
-//        return $databaseStatus;
-//    }
-//
-//    public function getCategoryFromSubcategory(string $subcategory): string
-//    {
-//        $idSub = $this->getIdSubcategory($subcategory);
-//
-//        $sql = 'SELECT nome_categoria FROM categorias c
-//                JOIN subcategorias s ON c.id_categoria = s.id_categoria
-//                WHERE id_subcategoria = :id_subcategoria';
-//
-//        $statement = $this->pdo->prepare($sql);
-//        $statement->bindValue(':id_subcategoria', $idSub);
-//        $statement->execute();
-//        $categoria = $statement->fetchColumn();
-//
-//        return $categoria;
-//    }
-//
-//    public function getNameCategory(int $idCategoria): string
-//    {
-//        $sql = 'SELECT nome_categoria FROM categorias
-//                WHERE id_categoria = :id_categoria';
-//
-//        $statement = $this->pdo->prepare($sql);
-//        $statement->bindValue(':id_categoria', $idCategoria);
-//        $statement->execute();
-//        $categoria = $statement->fetchColumn();
-//
-//        return $categoria;
-//    }
-//
-//    public function getIdCategory(string $categoria): int
-//    {
-//        $sql = 'SELECT id_categoria FROM categorias
-//                WHERE nome_categoria = :categoria';
-//
-//        $statement = $this->pdo->prepare($sql);
-//        $statement->bindValue(':categoria', $categoria);
-//        $statement->execute();
-//        $idCategoria = $statement->fetchColumn();
-//
-//        return $idCategoria;
-//    }
-//
-//    public function getNameSubcategory(int $idSubcategoria): string
-//    {
-//        $sql = 'SELECT nome_subcategoria FROM subcategorias
-//                WHERE id_subcategoria = :id_subcategoria';
-//
-//        $statement = $this->pdo->prepare($sql);
-//        $statement->bindValue(':id_subcategoria', $idSubcategoria);
-//        $statement->execute();
-//        $subcategoria = $statement->fetchColumn();
-//
-//        return $subcategoria;
-//    }
-//
-//    public function getIdSubcategory(string $subcategoria): int
-//    {
-//        $sql = 'SELECT id_subcategoria FROM subcategorias
-//                WHERE nome_subcategoria = :subcategoria';
-//
-//        $statement = $this->pdo->prepare($sql);
-//        $statement->bindValue(':subcategoria', $subcategoria);
-//        $statement->execute();
-//        $idSubcategoria = $statement->fetchColumn();
-//
-//        return $idSubcategoria;
-//    }
-//
-//    public function getIdStatus(string $nameStatus): int
-//    {
-//        $sql = 'SELECT id_status FROM status_estoque
-//                WHERE nome_status = :nome_status';
-//
-//        $statement = $this->pdo->prepare($sql);
-//        $statement->bindValue(':nome_status', $nameStatus);
-//        $statement->execute();
-//        $idStatus = $statement->fetchColumn();
-//
-//        return $idStatus;
-//    }
-//
-//    public function getNameStatus(int $idStatus): string
-//    {
-//        $sql = 'SELECT nome_status FROM status_estoque
-//                WHERE id_status = :id_status';
-//
-//        $statement = $this->pdo->prepare($sql);
-//        $statement->bindValue(':id_status', $idStatus);
-//        $statement->execute();
-//        $status = $statement->fetchColumn();
-//
-//        return $status;
-//
-//    }
+    // READ BY ID
+    public function findById(int $id): Product
+    {
+        $sql = 'SELECT * FROM products
+                WHERE id = :id';
+
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(':id', $id, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        if ($statement->rowCount() !== 1) {
+            // FIRE ALARM JAVASCRIPT
+            header('Location: /?error=findById-row-count-not-1');
+            exit();
+        }
+
+        $productData = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $this->dataToModel($productData);
+    }
+
+    // READ BY CATEGORY
+    public function findByCategory(int $categoryId): array
+    {
+        $sql = 'SELECT * FROM products
+                WHERE category_id = :category_id';
+
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(':category_id', $categoryId);
+
+        $statement->execute();
+
+        $producstData = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return array_map(
+            function ($oneProductData) {
+                return $this->dataToModel($oneProductData);
+            },
+            $producstData
+        );
+    }
+
+    // GET CATEGORY ID A PARTIR DA SUBCATEGORY ID (inner join categories table e subcategories table)
+    public function getCategoryFromSubcategory(int $subcategoryId): int
+    {
+        $sql = 'SELECT categories.id
+                FROM categories
+                INNER JOIN subcategories ON categories.id = subcategories.category_id
+                WHERE subcategories.id = :subcategory_id';
+
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(':subcategory_id', $subcategoryId, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        return $statement->fetchColumn();
+    }
+
+    // GET CATEGORY ID PELO NAME
+    public function getCategoryId(string $category): int
+    {
+        $sql = 'SELECT id FROM categories
+                WHERE name = :category';
+
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(':category', $category);
+
+        $statement->execute();
+
+        return $statement->fetchColumn();
+    }
+
+    // GET SUBCATEGORY ID PELO NAME
+    public function getSubcategoryId(string $subcategory): int
+    {
+        $sql = 'SELECT id FROM subcategories
+                WHERE name = :subcategory';
+
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(':subcategory', $subcategory);
+
+        $statement->execute();
+
+        return $statement->fetchColumn();
+    }
+
+    // GET CATEGORY NAME PELO ID
+    public function getCategoryName(int $category): string
+    {
+        $sql = 'SELECT name FROM categories
+                WHERE id = :category';
+
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(':category', $category);
+
+        $statement->execute();
+
+        return $statement->fetchColumn();
+    }
+
+    // GET SUBCATEGORY NAME PELO ID
+    public function getSubcategoryName(int $subcategory): string
+    {
+        $sql = 'SELECT name FROM subcategories
+                WHERE id = :subcategory';
+
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(':subcategory', $subcategory);
+
+        $statement->execute();
+
+        return $statement->fetchColumn();
+    }
+
+    // LISTA AS CATEGORIAS
+    public function listCategories(): array
+    {
+        $sql = 'SELECT * FROM categories';
+
+        $statement = $this->pdo->query($sql);
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // LISTA AS SUBCATEGORIAS
+    public function listSubcategories(): array
+    {
+        $sql = 'SELECT * FROM subcategories';
+
+        $statement = $this->pdo->query($sql);
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // LISTA OS STATUS
+    public function listStatus(): array
+    {
+        $sql = 'SELECT * FROM product_status';
+
+        $statement = $this->pdo->query($sql);
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

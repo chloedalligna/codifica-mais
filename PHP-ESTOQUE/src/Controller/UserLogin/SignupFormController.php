@@ -7,15 +7,15 @@ use Chloe\PhpEstoque\Repository\UserRepository;
 
 class SignupFormController implements Controller
 {
-    private UserRepository $repository;
-    public function __construct(UserRepository $repository)
-    {
-        $this->repository = $repository;
-    }
 
     public function processRequest(): void
     {
-        require_once __DIR__ . "/../../views/signup.php";
+        if (array_key_exists('logado', $_SESSION) && $_SESSION['logado'] === true) { // OU (($_SESSION['logado'] ?? false) === true)
+            header('Location: /');
+            return;
+        }
+
+        require_once __DIR__ . "/../../../views/UserLogin/signup.php";
     }
 
 }

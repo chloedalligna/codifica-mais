@@ -8,31 +8,37 @@ use Chloe\PhpEstoque\Repository\ProductRepository;
 
 class UpdateFormProductController implements Controller
 {
-    private ProductRepository $repository;
-    public function __construct(ProductRepository $repository)
+    private ProductRepository $productRepository;
+
+    public function __construct(ProductRepository $productRepository)
     {
-        $this->repository = $repository;
+        $this->productRepository = $productRepository;
     }
 
     public function processRequest(): void
     {
-        $listSubcategories = $this->repository->listSubcategories();
-        $listStatus = $this->repository->listStatus();
+        // REQUISIÇÕES HEADER
+        $categoryId = filter_input(INPUT_GET, 'category', FILTER_VALIDATE_INT);
+        if ($categoryId === false || $categoryId === null) {
+            $products = $this->productRepository->listAll();
+        } else {
+            $products = $this->productRepository->findByCategory($categoryId);
+        }
+        $listCategories = $this->productRepository->listCategories();
+        // FIM REQUISIÇÕES HEADER
 
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if ($id !== false && $id !== null) {
+            $product = $this->productRepository->findById($id);
+        }
 
+        // Se utilizasse o mesmo view de form para cadastro e edição
 //        /** @var ?Product $product */
 //        $product = null;
 
-        if ($id !== false && $id !== null) {
+        $listSubcategories = $this->productRepository->listSubcategories();
 
-            $product = $this->repository->findById($id);
-
-        }
-
-        $databaseCategorias = $this->repository->listCategories();
-
-        require_once __DIR__ . '/../../views/update-product-form.php';
+        require_once __DIR__ . '/../../../views/Product/update-form-product.php';
 
     }
 }

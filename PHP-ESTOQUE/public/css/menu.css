@@ -1,6 +1,6 @@
 /* MENU LATERAL */
 
-.modal {
+.modal-menu {
     display: none;
     position: fixed;
     z-index: 2;
@@ -20,7 +20,7 @@
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    width: 250px;
+    width: 300px;
     height: 100vh;
     top: 0;
     left: 0;
@@ -34,7 +34,7 @@
 
 .menu-lateral-titulo {
     /*border: lightgreen solid 3px;*/
-    color: var(--ciano);
+    color: white;
     padding: 1.5vh 1.5em;
     width: 100%;
 }
@@ -50,32 +50,23 @@
     width: 100%;
 }
 
-.menu-lateral-ul a {
+.menu-lateral-li a {
     text-decoration: none;
 }
 
-.menu-lateral-li {
+.menu-lateral-li-div {
     /*border: mediumspringgreen solid 3px;*/
-    padding: 1.5vh 1.5em;
+    padding: 1em 1.5em;
     width: 100%;
     color: white;
-    font-size: larger;
-    font-weight: bold;
+    font-size: 20px;
 }
 
 .menu-lateral-li:hover {
     background-color: var(--laranja);
 }
 
-
-@media screen and (max-width: 500px) {
-
+.menu-lateral-li-div:hover {
+    color: var(--azul-escuro);
 }
 
-@media screen and (min-width: 501px) and (max-width: 1023px) {
-
-}
-
-@media screen and (min-width: 1024px) {
-
-}

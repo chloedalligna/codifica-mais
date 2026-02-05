@@ -5,14 +5,16 @@ namespace Chloe\PhpEstoque\Repository;
 interface Repository
 {
     // CRUD
-    public function listAll(); // read
+    public function listAll(); // read all
 
-    public function create($object); // create
+    public function create(); // create
 
-    public function update($object); // update
+    public function update(); // update
 
-    public function delete($id); // delete
+    public function delete(int $id); // delete
 
-//    public function findById($id);
+    public function findById(int $id); // read by id
+
+    public function dataToModel(array $data); // array maps data and returns the model
 
 }

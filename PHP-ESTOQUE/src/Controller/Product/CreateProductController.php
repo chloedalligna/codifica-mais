@@ -8,65 +8,70 @@ use Chloe\PhpEstoque\Repository\ProductRepository;
 
 class CreateProductController implements Controller
 {
-    private ProductRepository $repository;
-    public function __construct(ProductRepository $repository)
+    private ProductRepository $productRepository;
+
+    public function __construct(ProductRepository $productRepository)
     {
-        $this->repository = $repository;
+        $this->productRepository = $productRepository;
     }
 
     public function processRequest(): void
     {
-        $nameProduct = filter_input(INPUT_POST, 'nameProduct', FILTER_SANITIZE_STRING);
-        if ($nameProduct === false || $nameProduct === null) {
-            header('Location: /?erro=nome_produto_invalido');
+
+        $name = filter_input(INPUT_POST, 'name');
+        if ($name === false || $name === null) {
+            header('Location: /create?error=name');
             exit();
         }
 
-        $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
-        if ($price === false || $price === null) {
-            header('Location: /?erro=preco_produto_invalido');
+        $subcategoryId = filter_input(INPUT_POST, 'subcategoryName');
+        if (empty($subcategoryId)) {
+            header('Location: /create?error=subcategory');
             exit();
         }
 
         $quantity = filter_input(INPUT_POST, 'quantity', FILTER_VALIDATE_INT);
         if ($quantity === false || $quantity === null) {
-            header('Location: /?erro=quantidade_produto_invalido');
+            header('Location: /create?error=quantity');
             exit();
         }
 
-        $imageUrl = filter_input(INPUT_POST, 'imageUrl', FILTER_SANITIZE_URL);
-        if ($imageUrl === false || $imageUrl === null) {
-            header('Location: /?erro=imagemUrl_produto_invalido');
+        $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
+        if ($price === false || $price === null) {
+            header('Location: /create?error=price');
             exit();
         }
 
-        $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
+        $description = filter_input(INPUT_POST, 'description');
         if ($description === false || $description === null) {
-            header('Location: /?erro=descricao_produto_invalido');
+            header('Location: /create?error=description');
             exit();
         }
-        if (isset($_POST['cadastro'])){
 
-            $nameSubcategory = $_POST['nameSubcategory'];
-            $nameCategory = $this->repository->getCategoryFromSubcategory($_POST['nameSubcategory']);
-//            $idStatus = $this->repository->getIdStatus($_POST['nameStatus']);
+        if (isset($_POST['create'])){
+
+            $categoryId = $this->productRepository->getCategoryFromSubcategory($subcategoryId);
 
             $product = new Product(
-                $nameProduct,
-                $nameCategory,
-                $nameSubcategory,
-                $price,
+                $name,
+                $categoryId,
+                $subcategoryId,
                 $quantity,
-                $imageUrl,
+                $price,
                 $description);
 
-            $result = $this->repository->addProduct($product);
+            if (isset($_FILES['image']) && !empty($_FILES['image']['tmp_name'])) {
+                $product->setImagePath(uniqid() . $_FILES['image']['name']);
+                move_uploaded_file($_FILES['image']['tmp_name'], $product->getImageDir());
+            }
 
-            if ($result === false) {
-                header('Location: /?erro=falha_cadastro');
+            $success = $this->productRepository->create($product);
+
+            if ($success === false) {
+                header('Location: /create?error=create');
 
             } else {
-                header('Location: /?sucesso=produto_cadastrado');
+                header('Location: /?success=product_created');
             }
 
         }

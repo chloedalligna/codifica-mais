@@ -42,6 +42,9 @@ if (array_key_exists($mainKey, $routes) && array_key_exists($secondaryKey, $rout
 /** @var Controller $controller */
 $controller->processRequest();
 
+
+// ESCRITA ALTERNATIVA PARA ACESSAR AS ROTAS (com correspondência comentada no routes.php)
+
 //$key = "$httpMethod|$path_info";
 
 //if (array_key_exists($key, $routes)) {

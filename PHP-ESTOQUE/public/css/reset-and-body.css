@@ -64,14 +64,19 @@ body {
   width: 100%;
   font-family: "Raleway", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 500;
+  font-weight: 600;
   font-style: normal;
+  overflow: hidden;
 }
 
-h1, h2, h3, button, strong {
+button, strong {
   font-family: "Special Gothic Expanded One", sans-serif;
   font-weight: 400;
   font-style: normal;
+}
+
+strong {
+  font-size: 1.2em;
 }
 
 :root {

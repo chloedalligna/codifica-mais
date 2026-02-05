@@ -38,6 +38,7 @@ nav {
 
 .nav-home {
   flex-grow: 0;
+  padding-top: 0.5em;
 }
 
 .nav-pesquisador {
@@ -51,16 +52,21 @@ nav {
 }
 
 .nav-menu-lateral-div {
-  left: 0px;
+  left: 0;
   margin: 2vh 3vw;
 }
 
 .nav-menu-lateral-botao {
-  padding: 0;
+  padding: 1em;
+  border-radius: 20px;
+}
+
+.nav-menu-lateral-botao:hover {
+  background-color: var(--pessego);
 }
 
 .home-div {
-  margin: 1vh 3vw 0 1vw;
+  margin: 2vh 3vw 0 1vw;
 }
 
 .home-botao {
@@ -75,6 +81,12 @@ nav {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 1em;
+  border-radius: 20px;
+}
+
+.pesquisador:hover {
+  background-color: var(--pessego);
 }
 
 #pesquisa {
@@ -82,7 +94,7 @@ nav {
   color: var(--azul-escuro);
   border: none;
   border-radius: 20px;
-  margin-right: 10px;
+  margin-right: 5px;
   padding: 10px 15px 10px 15px;
 }
 
@@ -101,7 +113,7 @@ nav {
   color: var(--azul-escuro);
   font-size: 20px;
   border: none;
-  padding: 1em;
+  padding: 1.2rem;
   border-radius: 20px;
 }
 
@@ -128,6 +140,12 @@ li a {
 .logo {
   max-height: 6vh;
   width: auto;
+}
+
+/* HEADER LOGIN FORM */
+
+#nav-signup-botao {
+  padding: 0;
 }
 
 /*@media screen and (max-width: 500px) {*/

@@ -7,45 +7,28 @@ use Chloe\PhpEstoque\Repository\UserRepository;
 
 class LoginController implements Controller
 {
-    private UserRepository $repository;
+    private UserRepository $userRepository;
+
     public function __construct(UserRepository $userRepository)
     {
-        $this->repository = $userRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function processRequest(): void
     {
-
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         if ($email === false || $email === null) { //
-            header('Location: /login?erro=credenciais_invalidas');
+            header('Location: /login?error=email');
             exit();
         }
 
         $password = filter_input(INPUT_POST, 'password');
-        if ($password === false || $password === null || $password === '') {
-            header('Location: /login?erro=credenciais_invalidas');
+        if ($password === false || $password === null) {
+            header('Location: /login?error=password');
             exit();
         }
 
-
-//        $password = password_hash($password, PASSWORD_ARGON2ID);
-
-        $this->repository->authenticateUser($email, $password);
-
+        $this->userRepository->loginAuthentication($email, $password);
     }
 
 }
-
-
-//$email = $_POST['email'] ?? '';
-//$senha = $_POST['senha'] ?? '';
-//
-//// validar/autenticar...
-//$autenticado = authenticate($email, $senha);
-//
-//if ($autenticado) {
-//    // evitar anexar dados sensíveis na URL
-//    header('Location: /');
-//    exit;
-//} else {

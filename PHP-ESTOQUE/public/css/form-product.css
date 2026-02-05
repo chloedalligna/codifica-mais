@@ -1,0 +1,113 @@
+/* FORMS */
+
+.main-form {
+    /*border: 3px solid #000;*/
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    padding: 18vh 2rem 3rem 2rem;
+    height: auto;
+}
+
+.formulario {
+    /*border: 3px solid green;*/
+    position: relative;
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+}
+
+.scroll {
+    overflow-x: hidden;
+}
+
+.formulario-div {
+    /*border: olive 3px dashed;*/
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin: 1em;
+    font-size: 1.6em;
+}
+
+.formulario-titulo {
+    /*border: 3px solid yellow;*/
+    display: flex;
+    justify-content: center;
+    color: var(--azul-escuro);
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 1em;
+}
+
+.formulario-label {
+    /*border: 3px dashed blueviolet;*/
+    line-height: 1.5;
+    padding: 0.5rem 0;
+    font-weight: 700;
+    color: var(--azul-escuro);
+}
+
+#label-radio {
+    font-size: larger;
+    width: fit-content;
+    text-wrap: nowrap;
+    padding: 1em;
+}
+
+.formulario-input {
+    border: none;
+    background-color: var(--pessego);
+    color: var(--laranja-escuro);
+    font-weight: bold;
+    border-radius: 20px;
+    /*margin-right: 10px;*/
+    padding: 10px 15px 10px 15px;
+    width: 700px;
+}
+
+.container-radio{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    width: 30%;
+}
+
+.container-radio div{
+    /*border: 3px dashed deeppink;*/
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.create-update-radio {
+    width: 10px;
+}
+
+input[type="radio"] {
+    transform: scale(1.5);
+    margin: 10px; /* Add margin to prevent overlapping */
+}
+
+.formulario-botao {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    bottom: 0;
+    left: 40%;
+    margin: 1rem;
+}
+
+.formulario-post:hover {
+    background-color: var(--azul-escuro);
+    color: var(--ciano);
+}
+
+.formulario-post {
+    background-color: var(--ciano);
+    color: var(--azul-escuro);
+    font-size: 20px;
+    font-family: "Special Gothic Expanded One", sans-serif;
+    border: none;
+    padding: 1.2rem;
+    border-radius: 20px;
+}

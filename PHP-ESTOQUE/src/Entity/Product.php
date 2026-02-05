@@ -7,21 +7,23 @@ class Product
     // ATRIBUTOS
     private int $id;
     private string $name;
-    private string $categoryId; // product data no banco de dados
-    private string $subcategoryId; // product data no banco de dados
-
-//    private string $categoryName;
-//    private string $subcategoryName;
+    private string $categoryId;
+    private string $subcategoryId;
     private int $quantity;
     private float $price;
     private string $description;
     private string $imagePath;
-    private int $statusId; // product data no banco de dados
-
-//    private int $statusName;
+    private int $statusId;
 
     // CONSTRUTOR
-    public function __construct(string $name, string $categoryId, string $subcategoryId, int $quantity, float $price, string $description, ?string $imagePath, int $statusId = null)
+    public function __construct(string $name,
+                                string $categoryId,
+                                string $subcategoryId,
+                                int $quantity,
+                                float $price,
+                                string $description,
+                                ?string $imagePath = 'default-image.png',
+                                ?int $statusId = null)
     {
         $this->name = $name;
         $this->categoryId = $categoryId;
@@ -31,13 +33,11 @@ class Product
         $this->description = $description;
         $this->imagePath = $imagePath;
 
-        if ( $statusId === null) {
-            $this->setStatusId($quantity); // define statusId com base na quantidade
+        if ($statusId === null) {
+            $this->setStatusId($quantity); // DEFINE statusId COM BASE EM quantity
         } else {
             $this->statusId = $statusId;
         }
-//        $this->setIdCategory($nameCategory);
-//        $this->setIdSubcategory($nameSubcategory);
     }
 
     // GETTERS E SETTERS
@@ -90,9 +90,19 @@ class Product
         return $this->description;
     }
 
+    public function setImagePath(string $imagePath): void
+    {
+        $this->imagePath = $imagePath;
+    }
+
     public function getImagePath(): string
     {
         return $this->imagePath;
+    }
+
+    public function getImageDir(): string
+    {
+        return "assets/products/" . $this->imagePath;
     }
 
     private function setStatusId(int $quantity): void

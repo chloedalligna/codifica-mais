@@ -38,6 +38,8 @@ class User
     {
         if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
             throw new \InvalidArgumentException("E-mail inválido.");
+//            header('Location: /signup?error=setEmail_email_invalido');
+//            exit();
         }
 
         $this->email = $email;

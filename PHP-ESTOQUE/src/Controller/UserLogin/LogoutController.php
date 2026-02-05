@@ -14,6 +14,6 @@ class LogoutController implements Controller
         unset($_SESSION['logado']);
         session_destroy();
         header('location: /login');
-        exit();
     }
+
 }

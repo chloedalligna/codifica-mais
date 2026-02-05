@@ -7,27 +7,28 @@ use Chloe\PhpEstoque\Repository\ProductRepository;
 
 class DeleteProductController implements Controller
 {
-    private ProductRepository $repository;
-    public function __construct(ProductRepository $repository)
+    private ProductRepository $productRepository;
+
+    public function __construct(ProductRepository $productRepository)
     {
-        $this->repository = $repository;
+        $this->productRepository = $productRepository;
     }
 
     public function processRequest(): void
     {
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-        if ($id === false) {
-            header('Location: /?erro=produto_inexistente');
+        if ($id === false || $id === null) {
+            header('Location: /?error=id');
             exit();
         }
 
-        $result = $this->repository->deleteProduct($id);
+        $success = $this->productRepository->delete($id);
 
-        if ($result === false) {
-            header('Location: /?erro=falha_exclusao');
+        if ($success === false) {
+            header('Location: /?error=delete');
 
         } else {
-            header('Location: /?sucesso=produto_excluido');
+            header('Location: /?success=product_deleted');
         }
     }
 }

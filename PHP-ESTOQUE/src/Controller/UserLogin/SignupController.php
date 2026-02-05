@@ -8,25 +8,30 @@ use Chloe\PhpEstoque\Repository\UserRepository;
 
 class SignupController implements Controller
 {
-    private UserRepository $repository;
+    private UserRepository $userRepository;
+
     public function __construct(UserRepository $userRepository)
     {
-        $this->repository = $userRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function processRequest(): void
     {
-        $username = $_POST['username'];
+        $username = filter_input(INPUT_POST, 'username');
+        if ($username === false || $username === null) {
+            header('Location: /signup?error=username');
+            exit();
+        }
 
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         if ($email === false || $email === null) {
-            header('Location: /signup?erro=credenciais_invalidas');
+            header('Location: /signup?error=email');
             exit();
         }
 
         $password = filter_input(INPUT_POST, 'password');
         if ($password === false || $password === null) {
-            header('Location: /signup?erro=credenciais_invalidas');
+            header('Location: /signup?error=passaword');
             exit();
         }
 
@@ -35,15 +40,13 @@ class SignupController implements Controller
             $email,
             $password);
 
-        $result = $this->repository->addUser($user);
+        $success = $this->userRepository->create($user);
 
-        if ($result === false) {
-            header('Location: /login?erro=falha_signup');
-            exit();
+        if ($success === false) {
+            header('Location: /login?error=signup');
         } else {
-            header('Location: /login?sucesso=usuario_cadastrado');
-            exit();
+            header('Location: /login?success=usuario_cadastrado');
         }
-
     }
+
 }
