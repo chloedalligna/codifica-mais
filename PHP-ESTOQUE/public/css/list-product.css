@@ -1,0 +1,139 @@
+/* LISTAGEM */
+
+.main-product-list {
+  padding-top: 15vh;
+  /*border: solid 3px lawngreen;*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.section-create-product {
+  position: fixed;
+  /*border: crimson dashed 3px;*/
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 15vh;
+  margin: 1.3em;
+  height: 5vh;
+  width: 100%;
+}
+
+.section-create-product button {
+    background-color: var(--ciano);
+    border-radius: 20px;
+    border: none;
+}
+
+.section-a {
+  /*border: solid 2px darkmagenta;*/
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1.5rem;
+  color: var(--azul-escuro);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.list {
+  /*background-color: olive;*/
+  width: 100%;
+  padding: 10vh;
+  color: var(--azul-escuro);
+}
+
+#cabecalho {
+  background-color: var(--ciano);
+  color: var(--azul-escuro);
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 20px;
+  padding: 1rem 1rem 1rem 0;
+}
+
+.list-ul {
+  /*border: yellow 3px solid;*/
+  padding: 0;
+  white-space: nowrap;
+}
+
+.scroll {
+  height: 60vh;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+/*.list-li {*/
+/*  border: 2px dashed hotpink;*/
+/*}*/
+
+.list-div {
+  /*border: 2px solid greenyellow;*/
+  border-radius: 20px;
+  margin: 1vh 0;
+  padding: 1vh 1rem 1vh 0;
+}
+
+.column {
+  /*border: violet 3px dashed;*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#column-product {
+  width: 300px;
+}
+
+#column-quantity {
+  width: 120px;
+}
+
+#column-price {
+  width: 150px;
+}
+
+#column-subcategory {
+  width: 200px;
+}
+
+#column-category {
+  width: 200px;
+}
+
+#column-info {
+  width: 70px;
+}
+
+#column-info button {
+  background-color: transparent;
+  border: none;
+}
+
+#column-botao {
+  width: 70px;
+}
+
+/*#view-product {*/
+/*}*/
+
+.produtos {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-around;
+  font-size: large;
+}
+
+.produtos .icon {
+  width: 1.5em;
+  height: auto;
+}

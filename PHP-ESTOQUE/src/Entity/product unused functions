@@ -1,0 +1,40 @@
+public function setIdCategory(string $nameCategory): void
+{
+    $productRepository = new \Chloe\PhpEstoque\Repository\ProductRepository();
+    $idCategory = $productRepository->getIdCategory($nameCategory);
+    $this->idCategory = $idCategory;
+}
+
+ public function setIdSubcategory(string $nameSubcategory): void
+{
+    $productRepository = new \Chloe\PhpEstoque\Repository\ProductRepository();
+    $idSubcategory = $productRepository->getIdSubcategory($nameSubcategory);
+    $this->idSubcategory = $idSubcategory;
+}
+
+
+// NOME DE CATEGORIA E SUBCATEGORIA
+
+public function setNameCategory(int $idCategory): void
+{
+    $productRepository = new \Chloe\PhpEstoque\Repository\ProductRepository();
+    $nameCategory = $productRepository->getNameCategory($idCategory);
+    $this->nameCategory = $nameCategory;
+}
+
+public function getNameCategory(): string
+{
+    return $this->nameCategory;
+}
+
+public function setNameSubcategory(int $idSubcategory): void
+{
+    $productRepository = new \Chloe\PhpEstoque\Repository\ProductRepository();
+    $nameSubcategory = $productRepository->getNameSubcategory($idSubcategory);
+    $this->nameSubcategory = $nameSubcategory;
+}
+
+public function getNameSubcategory(): string
+{
+    return $this->nameSubcategory;
+}

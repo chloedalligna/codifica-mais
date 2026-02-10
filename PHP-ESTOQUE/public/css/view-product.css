@@ -1,0 +1,105 @@
+/* VIEWER PRODUTO */
+
+.modal-view {
+    display: none;
+    align-items: center;
+    position: fixed;
+    z-index: 4;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(200,200,200,0.5);
+}
+
+.view-produto {
+    background-color: var(--pessego);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    margin-top: 10vh;
+    padding: 2rem;
+    border-radius: 20px;
+    width: fit-content;
+    max-height: 70rem;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    color: var(--laranja-escuro);
+}
+
+.name-close-button {
+    /*background-color: #31edae;*/
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    align-self: flex-end;
+}
+
+.view-name {
+    /*border: darkmagenta 2px dashed;*/
+    background-color: var(--laranja-escuro);
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 1rem 1.5rem;
+    border-radius: 20px;
+}
+
+.modal-close {
+    background-color: transparent;
+    border: none;
+}
+
+.view-content {
+    /*border: darkcyan 3px solid;*/
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+}
+
+.view-content h3 {
+    color: var(--azul-escuro);
+}
+
+.view-image {
+    margin-right: 2rem;
+}
+
+.view-image img {
+    border: 3px solid var(--azul-escuro);
+    border-radius: 20px;
+    width: auto;
+    max-height: 400px;
+}
+
+.view-ul {
+    /*border: 3px dashed firebrick;*/
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.view-li {
+    /*border: 2px solid gold;*/
+    background-color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 20px;
+    font-size: large;
+}
+
+.view-description {
+    /*border: 2px solid gold;*/
+    background-color: white;
+    margin-top: 2rem;
+    padding: 1rem 1.5rem;
+    border-radius: 20px;
+    font-size: large;
+    width: 100%;
+    font-weight: bold;
+}

@@ -1,0 +1,246 @@
+/* HEADER */
+
+header {
+  z-index: 3;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  height: 15vh;
+  width: 100%;
+  background-color: var(--laranja);
+  padding: 1vh;
+}
+
+nav {
+  width: 100%;
+}
+
+.nav-ul {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 3px;
+}
+
+/*.nav-li {*/
+/*  border: 2px solid black;*/
+/*}*/
+
+.nav-li-div {
+  /*border: white 2px solid;*/
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-menu-lateral {
+  flex-grow: 0
+}
+
+.nav-home {
+  flex-grow: 0;
+  padding-top: 0.5em;
+}
+
+.nav-pesquisador {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+.nav-login {
+  flex-grow: 0;
+}
+
+.nav-menu-lateral-div {
+  left: 0;
+  margin: 2vh 3vw;
+}
+
+.nav-menu-lateral-botao {
+  padding: 1em;
+  border-radius: 20px;
+}
+
+.nav-menu-lateral-botao:hover {
+  background-color: var(--pessego);
+}
+
+.home-div {
+  margin: 2vh 3vw 0 1vw;
+}
+
+.home-botao {
+  padding: 0;
+}
+
+.pesquisador-div {
+  padding: 0;
+}
+
+.pesquisador {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+  border-radius: 20px;
+}
+
+.pesquisador:hover {
+  background-color: var(--pessego);
+}
+
+#pesquisa {
+  background-color: var(--ciano-claro);
+  color: var(--azul-escuro);
+  border: none;
+  border-radius: 20px;
+  margin-right: 5px;
+  padding: 10px 15px 10px 15px;
+}
+
+.login-div {
+  margin: 2vh 4vw;
+}
+
+.button {
+  color: var(--azul-escuro);
+  background-color: transparent;
+  border: none;
+}
+
+.login-botao {
+  background-color: var(--ciano);
+  color: var(--azul-escuro);
+  font-size: 20px;
+  border: none;
+  padding: 1.2rem;
+  border-radius: 20px;
+}
+
+.login-botao:hover {
+  background-color: var(--azul-escuro);
+  color: var(--ciano);
+}
+
+.icon {
+  fill: var(--azul-escuro);
+  width: 2em;
+  height: 2em;
+}
+
+li {
+  list-style: none;
+  flex-direction: row;
+}
+
+li a {
+  text-decoration: none;
+}
+
+.logo {
+  max-height: 6vh;
+  width: auto;
+}
+
+/* HEADER LOGIN FORM */
+
+#nav-signup-botao {
+  padding: 0;
+}
+
+/*@media screen and (max-width: 500px) {*/
+
+/*  .nav-li {*/
+/*    border: 2px solid violet;*/
+/*  }*/
+
+/*  .nav-li-div {*/
+/*    border: yellow 2px solid;*/
+/*  }*/
+
+/*  .nav-pesquisador {*/
+/*    flex-grow: 0;*/
+/*    width: 70%;*/
+/*  }*/
+
+/*  .home-div {*/
+/*    margin: 0;*/
+/*    padding-left: 1vw;*/
+/*  }*/
+
+/*  .pesquisador-div {*/
+/*    width: 100%;*/
+/*  }*/
+
+/*  .pesquisador {*/
+/*    display: inline-flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*  }*/
+
+/*  #pesquisa {*/
+/*    height: 2em;*/
+/*    width: 100%;*/
+/*  }*/
+
+/*  .login-div {*/
+/*    margin: 0 1vw 0 4vw;*/
+/*  }*/
+
+/*  .login-botao {*/
+/*    font-size: medium;*/
+/*    padding: 10px 13px;*/
+/*    border-radius: 10px;*/
+/*  }*/
+
+/*  .avatar {*/
+/*    height: 2em;*/
+/*    width: 2em;*/
+/*  }*/
+
+/*  .icon {*/
+/*    width: 1.5em;*/
+/*    height: 1.5em;*/
+/*  }*/
+
+/*  .logo {*/
+/*    min-width: 32vh;*/
+/*    height: auto;*/
+/*  }*/
+
+/*}*/
+
+/*@media screen and (min-width: 501px) and (max-width: 1023px) {*/
+/*    */
+/*  .nav-li {*/
+/*    border: 2px solid green;*/
+/*  }*/
+
+/*  .nav-li-div {*/
+/*    border: darkred 2px solid;*/
+/*  }*/
+
+/*  .pesquisador-div {*/
+/*    padding: 0;*/
+/*    width: 100%;*/
+/*  }*/
+
+/*  #pesquisa {*/
+/*    width: 100%;*/
+/*  }*/
+
+/*  .icon {*/
+/*    width: 1.5em;*/
+/*    height: 1.5em;*/
+/*  }*/
+
+/*  .logo {*/
+/*    min-width: 15vh;*/
+/*    height: auto;*/
+/*  }*/
+
+/*}*/
+
+/*@media screen and (min-width: 1024px) {*/
+/* */
+/*}*/
