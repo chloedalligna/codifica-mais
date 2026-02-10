@@ -1,0 +1,15 @@
+{
+    "name": "chloe/php-poo",
+    "autoload": {
+        "psr-4": {
+            "ContaBancaria\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Chloe",
+            "email": "raionbyjinn@gmail.com"
+        }
+    ],
+    "require": {}
+}
