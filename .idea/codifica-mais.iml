@@ -19,6 +19,8 @@
       <excludeFolder url="file://$MODULE_DIR$/PHP-COMPOSER/PUPHPETEER/vendor/zoon/puphpeteer" />
       <excludeFolder url="file://$MODULE_DIR$/PHP-ESTOQUE/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/PHP-ESTOQUE/vendor/fortawesome/font-awesome" />
+      <excludeFolder url="file://$MODULE_DIR$/PHP-ESTOQUE/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/PHP-ESTOQUE/vendor/symfony/var-dumper" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
