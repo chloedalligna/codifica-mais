@@ -26,6 +26,8 @@
       <path value="$PROJECT_DIR$/PHP-COMPOSER/CARBON/vendor/carbonphp/carbon-doctrine-types" />
       <path value="$PROJECT_DIR$/PHP-COMPOSER/CARBON/vendor/composer" />
       <path value="$PROJECT_DIR$/PHP-COMPOSER/CARBON/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/PHP-ESTOQUE/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/PHP-ESTOQUE/vendor/symfony/var-dumper" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4">
