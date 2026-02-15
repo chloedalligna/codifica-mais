@@ -1,0 +1,52 @@
+[15/02/2026 15:50:41] Erro [0]: Class "Chloe\PhpEstoque\Controller\Product\ListProductController" not found; arquivo: C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\public\index.php; linha: 41; stack: #0 {main}
+
+[15/02/2026 17:12:38] Erro [0]: Class "Chloe\PhpEstoque\Controller\Product\DateTime" not found; arquivo: C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\CreateProductController.php; linha: 59; stack: #0 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\public\index.php(49): Chloe\PhpEstoque\Controller\Product\CreateProductController->processRequest()
+#1 {main}
+
+[15/02/2026 17:13:39] Erro [0]: Class "Chloe\PhpEstoque\Controller\Product\DateTime" not found; arquivo: C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\CreateProductController.php; linha: 59; stack: #0 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\public\index.php(49): Chloe\PhpEstoque\Controller\Product\CreateProductController->processRequest()
+#1 {main}
+
+[15/02/2026 17:17:27] Erro [0]: Chloe\PhpEstoque\Entity\Product::__construct(): Argument #5 ($price) must be of type float, null given, called in C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\CreateProductController.php on line 76; arquivo: C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Entity\Product.php; linha: 19; stack: #0 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\CreateProductController.php(76): Chloe\PhpEstoque\Entity\Product->__construct('olha', '2', '7', 0, NULL, NULL)
+#1 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\public\index.php(49): Chloe\PhpEstoque\Controller\Product\CreateProductController->processRequest()
+#2 {main}
+
+[15/02/2026 17:18:58] Erro [0]: Chloe\PhpEstoque\Entity\Product::__construct(): Argument #5 ($price) must be of type float, null given, called in C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\CreateProductController.php on line 73; arquivo: C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Entity\Product.php; linha: 19; stack: #0 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\CreateProductController.php(73): Chloe\PhpEstoque\Entity\Product->__construct('olha', '2', '7', 0, NULL, NULL)
+#1 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\public\index.php(49): Chloe\PhpEstoque\Controller\Product\CreateProductController->processRequest()
+#2 {main}
+
+[15/02/2026 17:21:20] Erro [0]: O campo 'quantidade' é obrigatório.; arquivo: C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\CreateProductController.php; linha: 45; stack: #0 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\public\index.php(49): Chloe\PhpEstoque\Controller\Product\CreateProductController->processRequest()
+#1 {main}
+
+[15/02/2026 17:21:20] Erro [0]: Chloe\PhpEstoque\Entity\Product::__construct(): Argument #5 ($price) must be of type float, null given, called in C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\CreateProductController.php on line 73; arquivo: C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Entity\Product.php; linha: 19; stack: #0 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\CreateProductController.php(73): Chloe\PhpEstoque\Entity\Product->__construct('olha', '2', '7', 0, NULL, NULL)
+#1 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\public\index.php(49): Chloe\PhpEstoque\Controller\Product\CreateProductController->processRequest()
+#2 {main}
+
+[15/02/2026 14:29:58] Erro [0]: O campo 'preço' é obrigatório.; arquivo: C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\CreateProductController.php; linha: 51; stack: #0 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\public\index.php(50): Chloe\PhpEstoque\Controller\Product\CreateProductController->processRequest()
+#1 {main}
+
+[15/02/2026 14:29:58] Erro [0]: Chloe\PhpEstoque\Entity\Product::__construct(): Argument #6 ($description) must be of type string, null given, called in C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\CreateProductController.php on line 73; arquivo: C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Entity\Product.php; linha: 19; stack: #0 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\CreateProductController.php(73): Chloe\PhpEstoque\Entity\Product->__construct('.........', '1', '1', 9, 0.0, NULL)
+#1 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\public\index.php(50): Chloe\PhpEstoque\Controller\Product\CreateProductController->processRequest()
+#2 {main}
+
+[15/02/2026 14:30:21] Erro [0]: O campo 'preço' é obrigatório.; arquivo: C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\CreateProductController.php; linha: 51; stack: #0 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\public\index.php(50): Chloe\PhpEstoque\Controller\Product\CreateProductController->processRequest()
+#1 {main}
+
+[15/02/2026 14:30:21] Erro [0]: Chloe\PhpEstoque\Entity\Product::__construct(): Argument #6 ($description) must be of type string, null given, called in C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\CreateProductController.php on line 73; arquivo: C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Entity\Product.php; linha: 19; stack: #0 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\CreateProductController.php(73): Chloe\PhpEstoque\Entity\Product->__construct('kjhg', '4', '15', 9, 0.0, NULL)
+#1 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\public\index.php(50): Chloe\PhpEstoque\Controller\Product\CreateProductController->processRequest()
+#2 {main}
+
+[15/02/2026 14:32:04] Erro [0]: O campo 'preço' é obrigatório.; arquivo: C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\CreateProductController.php; linha: 51; stack: #0 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\public\index.php(50): Chloe\PhpEstoque\Controller\Product\CreateProductController->processRequest()
+#1 {main}
+
+[15/02/2026 16:40:34] Erro [0]: O campo 'quantidade' está inválido. 
+Erro ao realizar edição do produto.; arquivo: C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\UpdateProductController.php; linha: 51; stack: #0 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\public\index.php(51): Chloe\PhpEstoque\Controller\Product\UpdateProductController->processRequest()
+#1 {main}
+
+[15/02/2026 16:40:43] Erro [0]: O campo 'quantidade' está inválido. 
+Erro ao realizar edição do produto.; arquivo: C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\UpdateProductController.php; linha: 51; stack: #0 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\public\index.php(51): Chloe\PhpEstoque\Controller\Product\UpdateProductController->processRequest()
+#1 {main}
+
+[15/02/2026 16:41:11] Erro [0]: O campo 'quantidade' está inválido. 
+Erro ao realizar edição do produto.; arquivo: C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\UpdateProductController.php; linha: 51; stack: #0 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\public\index.php(51): Chloe\PhpEstoque\Controller\Product\UpdateProductController->processRequest()
+#1 {main}
+

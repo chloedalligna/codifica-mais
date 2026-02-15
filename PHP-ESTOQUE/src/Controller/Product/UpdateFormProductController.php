@@ -19,7 +19,7 @@ class UpdateFormProductController implements Controller
     {
         // REQUISIÇÕES HEADER
         $categoryId = filter_input(INPUT_GET, 'category', FILTER_VALIDATE_INT);
-        if ($categoryId === false || $categoryId === null) {
+        if (empty($categoryId)) {
             $products = $this->productRepository->listAll();
         } else {
             $products = $this->productRepository->findByCategory($categoryId);
@@ -28,7 +28,7 @@ class UpdateFormProductController implements Controller
         // FIM REQUISIÇÕES HEADER
 
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-        if ($id !== false && $id !== null) {
+        if (!empty($id)) {
             $product = $this->productRepository->findById($id);
         }
 

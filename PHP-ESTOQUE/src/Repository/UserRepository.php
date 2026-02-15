@@ -16,14 +16,6 @@ class UserRepository
         $this->pdo = ConnectionPdo::connect();
     }
 
-//    /**
-//     * @return PDO
-//     */
-//    public function getPdo(): PDO
-//    {
-//        return $this->pdo;
-////    }
-
     // READ ALL
     public function listAll(): array
     {

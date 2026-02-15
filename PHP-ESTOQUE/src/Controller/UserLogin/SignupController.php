@@ -18,19 +18,19 @@ class SignupController implements Controller
     public function processRequest(): void
     {
         $username = filter_input(INPUT_POST, 'username');
-        if ($username === false || $username === null) {
+        if (empty($username)) {
             header('Location: /signup?error=username');
             exit();
         }
 
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-        if ($email === false || $email === null) {
+        if (empty($email)) {
             header('Location: /signup?error=email');
             exit();
         }
 
         $password = filter_input(INPUT_POST, 'password');
-        if ($password === false || $password === null) {
+        if (empty($password)) {
             header('Location: /signup?error=passaword');
             exit();
         }

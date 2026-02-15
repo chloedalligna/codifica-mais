@@ -4,7 +4,10 @@ namespace Chloe\PhpEstoque\Repository;
 
 use Chloe\PhpEstoque\Entity\Product;
 use Chloe\PhpEstoque\ConnectionPdo;
+use Chloe\PhpEstoque\ErrorLogMessage;
+use DateTime;
 use PDO;
+use PDOException;
 
 class ProductRepository
 {
@@ -14,14 +17,6 @@ class ProductRepository
     {
         $this->pdo = ConnectionPdo::connect();
     }
-//
-//    /**
-//     * @return PDO
-//     */
-//    public function getPdo(): PDO
-//    {
-//        return $this->pdo;
-//    }
 
     // READ ALL
     public function listAll(): array
@@ -42,48 +37,46 @@ class ProductRepository
     // CREATE
     public function create(Product $product): bool
     {
-        $sql = 'INSERT INTO products (
-                      name,
-                      category_id,
-                      subcategory_id,
-                      quantity,
-                      price,
-                      description,
-                      image_path,
-                      status_id)
-                VALUES (
-                        :name,
-                        :category_id,
-                        :subcategory_id,
-                        :quantity,
-                        :price,
-                        :description,
-                        :image_path,
-                        :status_id)';
+        try {
+            $sql = 'INSERT INTO products (
+                          name,
+                          category_id,
+                          subcategory_id,
+                          quantity,
+                          price,
+                          description,
+                          image_path,
+                          status_id)
+                    VALUES (
+                            :name,
+                            :category_id,
+                            :subcategory_id,
+                            :quantity,
+                            :price,
+                            :description,
+                            :image_path,
+                            :status_id)';
 
-//        $sql2 = 'IF EXISTS (SELECT product, c, CONSTRAINT_NAME, REFERENCED_TABLE_NAME, REFERENCED_COLUMN_NAME
-//        FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
-//        WHERE REFERENCED_TABLE_NAME = referenceTableName AND TABLE_SCHEMA  = schemaName AND TABLE_NAME = mainTableName AND CONSTRAINT_NAME = constraintName
-//
-//        END IF';
+            $statement = $this->pdo->prepare($sql);
 
-        $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(':name', $product->getName());
+            $statement->bindValue(':category_id', $product->getCategoryId());
+            $statement->bindValue(':subcategory_id', $product->getSubcategoryId());
+            $statement->bindValue(':quantity', $product->getQuantity());
+            $statement->bindValue(':price', $product->getPrice());
+            $statement->bindValue(':description', $product->getDescription());
+            $statement->bindValue(':image_path', $product->getImagePath());
+            $statement->bindValue(':status_id', $product->getStatusId());
 
-        $statement->bindValue(':name', $product->getName());
-        $statement->bindValue(':category_id', $product->getCategoryId());
-        $statement->bindValue(':subcategory_id', $product->getSubcategoryId());
-        $statement->bindValue(':quantity', $product->getQuantity());
-        $statement->bindValue(':price', $product->getPrice());
-        $statement->bindValue(':description', $product->getDescription());
-        $statement->bindValue(':image_path', $product->getImagePath());
-        $statement->bindValue(':status_id', $product->getStatusId());
+            $success = $statement->execute();
 
-        $success = $statement->execute();
+        } catch (PDOException $e) {
+//            if ($statement->rowCount() !== 1) {
+//                header('Location: /?error=update-row-count-not-1');
+//            }
 
-        if ($statement->rowCount() !== 1) {
-            // FIRE ALARM JAVASCRIPT
-            header('Location: /?error=create-row-count-not-1');
-            exit();
+            ErrorLogMessage::log($e, $e->getMessage());
+            return false;
         }
 
         $id = $this->pdo->lastInsertId();
@@ -95,34 +88,38 @@ class ProductRepository
     // UPDATE
     public function update(Product $product): bool
     {
+        try {
+            $sql = 'UPDATE products
+                    SET name = :name,
+                        category_id = :category_id,
+                        subcategory_id = :subcategory_id,
+                        quantity = :quantity,
+                        price = :price,
+                        description = :description,
+                        image_path = :image_path,
+                        status_id = :status_id
+                    WHERE id = :id';
 
-        $sql = 'UPDATE products
-                SET name = :name,
-                    category_id = :category_id,
-                    subcategory_id = :subcategory_id,
-                    quantity = :quantity,
-                    price = :price,
-                    description = :description,
-                    image_path = :image_path
-                WHERE id = :id';
+            $statement = $this->pdo->prepare($sql);
 
-        $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(':name', $product->getName());
+            $statement->bindValue(':category_id', $product->getCategoryId());
+            $statement->bindValue(':subcategory_id', $product->getSubcategoryId());
+            $statement->bindValue(':quantity', $product->getQuantity());
+            $statement->bindValue(':price', $product->getPrice());
+            $statement->bindValue(':description', $product->getDescription());
+            $statement->bindValue(':image_path', $product->getImagePath());
+            $statement->bindValue(':status_id', $product->getStatusId());
+            $statement->bindValue(':id', $product->getId(), PDO::PARAM_INT);
 
-        $statement->bindValue(':name', $product->getName());
-        $statement->bindValue(':category_id', $product->getCategoryId());
-        $statement->bindValue(':subcategory_id', $product->getSubcategoryId());
-        $statement->bindValue(':quantity', $product->getQuantity());
-        $statement->bindValue(':price', $product->getPrice());
-        $statement->bindValue(':description', $product->getDescription());
-        $statement->bindValue(':image_path', $product->getImagePath());
-        $statement->bindValue(':id', $product->getId(), PDO::PARAM_INT);
+            $success = $statement->execute();
+        } catch (PDOException $e) {
+//            if ($statement->rowCount() !== 1) {
+//                header('Location: /?error=update-row-count-not-1');
+//            }
 
-        $success = $statement->execute();
-
-        if ($statement->rowCount() !== 1) {
-            // FIRE ALARM JAVASCRIPT
-            header('Location: /?error=update-row-count-not-1');
-            exit();
+            ErrorLogMessage::log($e, $e->getMessage());
+            return false;
         }
 
         return $success;
@@ -131,13 +128,19 @@ class ProductRepository
     // DELETE
     public function delete($id): bool
     {
-        $sql = 'DELETE FROM products
-                WHERE id = :id';
+            $sql = 'DELETE FROM products
+                    WHERE id = :id';
 
-        $statement = $this->pdo->prepare($sql);
-        $statement->bindValue(':id', $id, PDO::PARAM_INT);
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(':id', $id, PDO::PARAM_INT);
 
-        return $statement->execute();
+            return $statement->execute();
+
+        } catch (PDOException $e) {
+            ErrorLogMessage::log($e, $e->getMessage());
+            return false;
+        }
     }
 
     // MAPPER
@@ -160,20 +163,25 @@ class ProductRepository
     }
 
     // READ BY ID
-    public function findById(int $id): Product
+    public function findById(int $id): ?Product
     {
-        $sql = 'SELECT * FROM products
-                WHERE id = :id';
+            $sql = 'SELECT * FROM products
+                    WHERE id = :id';
 
-        $statement = $this->pdo->prepare($sql);
-        $statement->bindValue(':id', $id, PDO::PARAM_INT);
+        try {
+                $statement = $this->pdo->prepare($sql);
+                $statement->bindValue(':id', $id, PDO::PARAM_INT);
 
-        $statement->execute();
+                $statement->execute();
 
-        if ($statement->rowCount() !== 1) {
-            // FIRE ALARM JAVASCRIPT
-            header('Location: /?error=findById-row-count-not-1');
-            exit();
+        } catch (PDOException $e) {
+//            if ($statement->rowCount() !== 1) {
+//                // FIRE ALARM JAVASCRIPT
+//                header('Location: /?error=findById-row-count-not-1');
+//            }
+
+            ErrorLogMessage::log($e, $e->getMessage());
+            return null;
         }
 
         $productData = $statement->fetch(PDO::FETCH_ASSOC);
@@ -182,24 +190,30 @@ class ProductRepository
     }
 
     // READ BY CATEGORY
-    public function findByCategory(int $categoryId): array
+    public function findByCategory(int $categoryId): ?array
     {
-        $sql = 'SELECT * FROM products
-                WHERE category_id = :category_id';
+            $sql = 'SELECT * FROM products
+                    WHERE category_id = :category_id';
 
-        $statement = $this->pdo->prepare($sql);
-        $statement->bindValue(':category_id', $categoryId);
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(':category_id', $categoryId);
 
-        $statement->execute();
+            $statement->execute();
 
-        $producstData = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $producstData = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        return array_map(
-            function ($oneProductData) {
-                return $this->dataToModel($oneProductData);
-            },
-            $producstData
-        );
+            return array_map(
+                function ($oneProductData) {
+                    return $this->dataToModel($oneProductData);
+                },
+                $producstData
+            );
+
+        } catch (PDOException $e) {
+            ErrorLogMessage::log($e, $e->getMessage());
+            return null;
+        }
     }
 
     // GET CATEGORY ID A PARTIR DA SUBCATEGORY ID (inner join categories table e subcategories table)
@@ -210,12 +224,18 @@ class ProductRepository
                 INNER JOIN subcategories ON categories.id = subcategories.category_id
                 WHERE subcategories.id = :subcategory_id';
 
+        try {
         $statement = $this->pdo->prepare($sql);
         $statement->bindValue(':subcategory_id', $subcategoryId, PDO::PARAM_INT);
 
         $statement->execute();
 
-        return $statement->fetchColumn();
+        } catch (PDOException $e) {
+            ErrorLogMessage::log($e, $e->getMessage());
+
+        } finally {
+            return $statement->fetchColumn();
+        }
     }
 
     // GET CATEGORY ID PELO NAME
@@ -224,12 +244,18 @@ class ProductRepository
         $sql = 'SELECT id FROM categories
                 WHERE name = :category';
 
+        try {
         $statement = $this->pdo->prepare($sql);
         $statement->bindValue(':category', $category);
 
         $statement->execute();
 
-        return $statement->fetchColumn();
+        } catch (PDOException $e) {
+            ErrorLogMessage::log($e, $e->getMessage());
+
+        } finally {
+            return $statement->fetchColumn();
+        }
     }
 
     // GET SUBCATEGORY ID PELO NAME
@@ -238,12 +264,18 @@ class ProductRepository
         $sql = 'SELECT id FROM subcategories
                 WHERE name = :subcategory';
 
+        try {
         $statement = $this->pdo->prepare($sql);
         $statement->bindValue(':subcategory', $subcategory);
 
         $statement->execute();
 
-        return $statement->fetchColumn();
+        } catch (PDOException $e) {
+            ErrorLogMessage::log($e, $e->getMessage());
+
+        } finally {
+            return $statement->fetchColumn();
+        }
     }
 
     // GET CATEGORY NAME PELO ID
@@ -252,12 +284,18 @@ class ProductRepository
         $sql = 'SELECT name FROM categories
                 WHERE id = :category';
 
+        try {
         $statement = $this->pdo->prepare($sql);
         $statement->bindValue(':category', $category);
 
         $statement->execute();
 
-        return $statement->fetchColumn();
+        } catch (PDOException $e) {
+            ErrorLogMessage::log($e, $e->getMessage());
+
+        } finally {
+            return $statement->fetchColumn();
+        }
     }
 
     // GET SUBCATEGORY NAME PELO ID
@@ -266,12 +304,18 @@ class ProductRepository
         $sql = 'SELECT name FROM subcategories
                 WHERE id = :subcategory';
 
+        try {
         $statement = $this->pdo->prepare($sql);
         $statement->bindValue(':subcategory', $subcategory);
 
         $statement->execute();
 
-        return $statement->fetchColumn();
+        } catch (PDOException $e) {
+            ErrorLogMessage::log($e, $e->getMessage());
+
+        } finally {
+            return $statement->fetchColumn();
+        }
     }
 
     // LISTA AS CATEGORIAS
@@ -279,9 +323,15 @@ class ProductRepository
     {
         $sql = 'SELECT * FROM categories';
 
+        try {
         $statement = $this->pdo->query($sql);
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $e) {
+            ErrorLogMessage::log($e, $e->getMessage());
+            return [];
+        }
     }
 
     // LISTA AS SUBCATEGORIAS
@@ -289,9 +339,15 @@ class ProductRepository
     {
         $sql = 'SELECT * FROM subcategories';
 
+        try {
         $statement = $this->pdo->query($sql);
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $e) {
+            ErrorLogMessage::log($e, $e->getMessage());
+            return [];
+        }
     }
 
     // LISTA OS STATUS
@@ -299,9 +355,15 @@ class ProductRepository
     {
         $sql = 'SELECT * FROM product_status';
 
+        try {
         $statement = $this->pdo->query($sql);
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $e) {
+            ErrorLogMessage::log($e, $e->getMessage());
+            return [];
+        }
     }
 
 }

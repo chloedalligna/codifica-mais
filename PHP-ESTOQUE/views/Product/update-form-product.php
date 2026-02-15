@@ -10,7 +10,7 @@ require_once __DIR__ . "/header.php";
 ?>
 <main class="main-form">
 
-    <section class="titulo-form">
+    <section class="formulario-titulo">
         <strong>Edição de Produto</strong>
     </section>
 
@@ -44,6 +44,8 @@ require_once __DIR__ . "/header.php";
             <?php endforeach; ?>
         </div>
 
+        <!--        Regra de validação: a quantidade não pode ser negativa -->
+        <!--        Implementada colocando o mínimo do input number como 0, ou seja, min=0. Assim, o usuário não pode inserir um valor negativo para a quantidade.-->
         <div class="formulario-div">
             <label class="formulario-label" for="quantity">Quantidade</label>
             <input name="quantity"
