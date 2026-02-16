@@ -11,18 +11,10 @@ class UserRepository
 
     private PDO $pdo;
 
-    public function __construct()
+    public function __construct(PDO $pdo)
     {
-        $this->pdo = ConnectionPdo::connect();
+        $this->pdo = $pdo;
     }
-
-//    /**
-//     * @return PDO
-//     */
-//    public function getPdo(): PDO
-//    {
-//        return $this->pdo;
-////    }
 
     // READ ALL
     public function listAll(): array
@@ -72,9 +64,9 @@ class UserRepository
     }
 
     // DELETE
-    public function deleteProduct($id): bool
+    public function deleteUser($id): bool
     {
-        $sql = 'DELETE FROM produtos WHERE id = :id';
+        $sql = 'DELETE FROM users WHERE id = :id';
         $statement = $this->pdo->prepare($sql);
         $statement->bindValue(':id', $id);
 

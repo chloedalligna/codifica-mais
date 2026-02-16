@@ -22,8 +22,7 @@ class Product
                                 int $quantity,
                                 float $price,
                                 string $description,
-                                ?string $imagePath = 'default-image.png',
-                                ?int $statusId = null)
+                                ?string $imagePath = 'default-image.png')
     {
         $this->name = $name;
         $this->categoryId = $categoryId;
@@ -32,12 +31,7 @@ class Product
         $this->price = $price;
         $this->description = $description;
         $this->imagePath = $imagePath;
-
-        if ($statusId === null) {
-            $this->setStatusId($quantity); // DEFINE statusId COM BASE EM quantity
-        } else {
-            $this->statusId = $statusId;
-        }
+        $this->setStatusId($quantity); // DEFINE statusId COM BASE EM quantity
     }
 
     // GETTERS E SETTERS

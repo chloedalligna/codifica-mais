@@ -26,22 +26,25 @@ require_once __DIR__ . "/header.php";
                    type="text"
                    id="name"
                    placeholder="Digite o nome do produto"
-                   required />
+                   required/>
         </div>
 
         <div class="container-radio">
-            <?php foreach($listSubcategories as $subcategory): ?>
+            <?php foreach ($listSubcategories as $subcategory): ?>
                 <div>
-                    <label id="label-radio" class="formulario-label" for="<?= $subcategory['name'] ?>" > <?= $subcategory['name'] ?> </label>
+                    <label id="label-radio" class="formulario-label"
+                           for="<?= $subcategory['name'] ?>"> <?= $subcategory['name'] ?> </label>
                     <input name="subcategoryName"
                            class="formulario-input create-update-radio"
                            type="radio"
                            id="<?= $subcategory['name'] ?>"
-                           value="<?= $subcategory['id'] ?>" />
+                           value="<?= $subcategory['id'] ?>"/>
                 </div>
             <?php endforeach; ?>
         </div>
 
+        <!--        Regra de validação: a quantidade não pode ser negativa -->
+        <!--        Implementada colocando o mínimo do input number como 0, ou seja, min=0. Assim, o usuário não pode inserir um valor negativo para a quantidade.-->
         <div class="formulario-div">
             <label class="formulario-label" for="quantity">Quantidade</label>
             <input name="quantity"
@@ -51,7 +54,7 @@ require_once __DIR__ . "/header.php";
                    min=0
                    id="quantity"
                    placeholder="Digite uma quantidade"
-                   required />
+                   required/>
         </div>
 
         <div class="formulario-div">
@@ -63,7 +66,7 @@ require_once __DIR__ . "/header.php";
                    min="0.00"
                    id="price"
                    placeholder="Digite um preço"
-                   required />
+                   required/>
         </div>
 
         <div class="formulario-div">
@@ -73,7 +76,7 @@ require_once __DIR__ . "/header.php";
                    type="text"
                    id="description"
                    placeholder="Digite uma descrição"
-                   required />
+                   required/>
         </div>
 
         <div class="formulario-div">
@@ -83,14 +86,14 @@ require_once __DIR__ . "/header.php";
                    type="file"
                    id="image"
                    placeholder="Envie uma imagem"
-                   accept="image/*" />
+                   accept="image/*"/>
         </div>
 
         <div class="formulario-botao">
             <input name="create"
                    class="formulario-post"
                    type="submit"
-                   value="CADASTRAR PRODUTO" />
+                   value="CADASTRAR PRODUTO"/>
         </div>
 
     </form>

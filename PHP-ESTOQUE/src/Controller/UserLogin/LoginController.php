@@ -17,13 +17,13 @@ class LoginController implements Controller
     public function processRequest(): void
     {
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-        if ($email === false || $email === null) { //
+        if (empty($email)) { //
             header('Location: /login?error=email');
             exit();
         }
 
         $password = filter_input(INPUT_POST, 'password');
-        if ($password === false || $password === null) {
+        if (empty($password)) {
             header('Location: /login?error=password');
             exit();
         }

@@ -2,7 +2,6 @@
 
 namespace Chloe\PhpEstoque\Controller\Product;
 
-use Alura\Mvc\Entity\Video;
 use Chloe\PhpEstoque\Controller\Controller;
 use Chloe\PhpEstoque\Repository\ProductRepository;
 
@@ -19,7 +18,7 @@ class CreateFormProductController implements Controller
     {
         // REQUISIÇÕES HEADER
         $categoryId = filter_input(INPUT_GET, 'category', FILTER_VALIDATE_INT);
-        if ($categoryId === false || $categoryId === null) {
+        if (empty($categoryId)) {
             $products = $this->productRepository->listAll();
         } else {
             $products = $this->productRepository->findByCategory($categoryId);

@@ -3,7 +3,6 @@
 namespace Chloe\PhpEstoque\Controller\Product;
 
 use Chloe\PhpEstoque\Controller\Controller;
-use Chloe\PhpEstoque\Entity\Product;
 use Chloe\PhpEstoque\Repository\ProductRepository;
 
 class ListProductController implements Controller
