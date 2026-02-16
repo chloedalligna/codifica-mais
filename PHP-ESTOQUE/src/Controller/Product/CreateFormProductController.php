@@ -2,7 +2,6 @@
 
 namespace Chloe\PhpEstoque\Controller\Product;
 
-use Alura\Mvc\Entity\Video;
 use Chloe\PhpEstoque\Controller\Controller;
 use Chloe\PhpEstoque\Repository\ProductRepository;
 

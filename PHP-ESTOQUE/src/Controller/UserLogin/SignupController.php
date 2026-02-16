@@ -31,22 +31,29 @@ class SignupController implements Controller
 
         $password = filter_input(INPUT_POST, 'password');
         if (empty($password)) {
-            header('Location: /signup?error=passaword');
+            header('Location: /signup?error=password');
             exit();
         }
 
-        $user = new User (
-            $username,
-            $email,
-            $password);
+        $emailAvailability = $this->userRepository->verifyEmailAvailability($email);
 
-        $success = $this->userRepository->create($user);
+        if ($emailAvailability && isset($_POST['signup'])) {
 
-        if ($success === false) {
-            header('Location: /login?error=signup');
-        } else {
-            header('Location: /login?success=usuario_cadastrado');
+            $user = new User (
+                $username,
+                $email,
+                $password);
+
+            $success = $this->userRepository->create($user);
+
+            if ($success === false) {
+                header('Location: /login?error=signup');
+            } else {
+                header('Location: /login?success=usuario_cadastrado');
+            }
+
         }
+
     }
 
 }

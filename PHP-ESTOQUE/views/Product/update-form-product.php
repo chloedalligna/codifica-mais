@@ -80,7 +80,7 @@ require_once __DIR__ . "/header.php";
                    id="description"
                    placeholder="Digite uma descrição"
                    required
-                   value="<?= $product->getdescription() ?>"/>
+                   value="<?= $product->getDescription() ?>"/>
         </div>
 
         <div class="formulario-div">
