@@ -50,3 +50,21 @@ Erro ao realizar edição do produto.; arquivo: C:\Users\chloe\Downloads\Codific
 Erro ao realizar edição do produto.; arquivo: C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\UpdateProductController.php; linha: 51; stack: #0 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\public\index.php(51): Chloe\PhpEstoque\Controller\Product\UpdateProductController->processRequest()
 #1 {main}
 
+[19/02/2026 19:44:02] Erro [1045]: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO); arquivo C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\ConnectionPdo.php; linha 14; stack #0 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\ConnectionPdo.php(14): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue))
+#1 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\public\index.php(18): Chloe\PhpEstoque\ConnectionPdo::connect()
+#2 {main}
+
+[19/02/2026 19:47:13] Erro [0]: O campo 'quantidade' está inválido. 
+Erro ao realizar cadastro do produto.; arquivo C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\CreateProductController.php; linha 47; stack #0 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\public\index.php(51): Chloe\PhpEstoque\Controller\Product\CreateProductController->processRequest()
+#1 {main}
+
+[19/02/2026 20:25:35] Erro [1045]: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO); arquivo C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\ConnectionPdo.php; linha 15; stack #0 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\ConnectionPdo.php(15): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue))
+#1 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\public\index.php(18): Chloe\PhpEstoque\ConnectionPdo::connect()
+#2 {main}
+
+[26/02/2026 17:49:33] Erro [0]: syntax error, unexpected token "{"; arquivo C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\views\Product\create-form-product.php; linha 101; stack #0 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\public\index.php(51): Chloe\PhpEstoque\Controller\Product\CreateFormProductController->processRequest()
+#1 {main}
+
+[26/02/2026 18:00:08] Erro [0]: O campo subcategoria está inválido.; arquivo C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\src\Controller\Product\CreateProductController.php; linha 38; stack #0 C:\Users\chloe\Downloads\Codifica_Mais_IDCAP\codifica-mais\PHP-ESTOQUE\public\index.php(51): Chloe\PhpEstoque\Controller\Product\CreateProductController->processRequest()
+#1 {main}
+

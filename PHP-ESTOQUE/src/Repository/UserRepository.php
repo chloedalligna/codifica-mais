@@ -4,6 +4,8 @@ namespace Chloe\PhpEstoque\Repository;
 
 use Chloe\PhpEstoque\ConnectionPdo;
 use Chloe\PhpEstoque\Entity\User;
+use Chloe\PhpEstoque\ErrorLogMessage;
+use Chloe\PhpEstoque\LoginException;
 use PDO;
 
 class UserRepository
@@ -111,24 +113,30 @@ class UserRepository
     // AUTENTICAÇÃO DO LOGIN DO USER
     public function loginAuthentication($email, $password): void
     {
-        $sql = 'SELECT * FROM users
-                WHERE email = :email';
+            try {
+            $sql = 'SELECT * FROM users
+                    WHERE email = :email';
 
-        $statement = $this->pdo->prepare($sql);
-        $statement->bindValue(':email', $email);
-        $statement->execute();
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(':email', $email);
+            $statement->execute();
 
-        $userData = $statement->fetch(PDO::FETCH_ASSOC);
+            $userData = $statement->fetch(PDO::FETCH_ASSOC);
 
-        $correctPassword = password_verify($password, $userData['password']);
+            $correctPassword = password_verify($password, $userData['password']);
 
-        if ($correctPassword) {
-            $_SESSION['username'] = $userData['username'];
-            $_SESSION['email'] = $email;
-            $_SESSION['logado'] = true;
-            header('Location: /?success=user_logged_in');
-        } else {
-            header('Location: /login?error=loginAuthentication');
+            if ($correctPassword) {
+                $_SESSION['username'] = $userData['username'];
+                $_SESSION['email'] = $email;
+                $_SESSION['logado'] = true;
+                header('Location: /?success=user_logged_in');
+            } else {
+    //            header('Location: /login?error=loginAuthentication');
+                throw new LoginException();
+            }
+        }
+        catch (LoginException $e) {
+            ErrorLogMessage::log($e, $e->getMessage());
         }
     }
 

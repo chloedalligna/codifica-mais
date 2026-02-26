@@ -5,10 +5,10 @@ namespace Chloe\PhpEstoque;
 class InvalidException extends \Exception
 {
     private string $element;
-
-    public function __construct(string $element, string $operation, $specificMessage = '') {
+    public function __construct(string $element, string $varname) {
         $this->element = $element;
-        $message = "O campo '$element' está inválido. " . $specificMessage . "\nErro ao realizar $operation do produto.";
+        $_SESSION['varname'] = $varname;
+        $message = "O campo $element está inválido.";
         parent::__construct($message);
     }
 }

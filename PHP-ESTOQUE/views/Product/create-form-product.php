@@ -27,6 +27,11 @@ require_once __DIR__ . "/header.php";
                    id="name"
                    placeholder="Digite o nome do produto"
                    required/>
+            <?php
+            if (!empty($_SESSION['error_message']) && isset($_SESSION['varname']) && $_SESSION['varname'] === 'name') {
+                echo "<div style='color: red'>" . $_SESSION['error_message'] . "</div>";
+            }
+            ?>
         </div>
 
         <div class="container-radio">
@@ -41,10 +46,13 @@ require_once __DIR__ . "/header.php";
                            value="<?= $subcategory['id'] ?>"/>
                 </div>
             <?php endforeach; ?>
+            <?php
+            if (!empty($_SESSION['error_message']) && isset($_SESSION['varname']) && $_SESSION['varname'] === 'subcategoryName') {
+                echo "<div style='color: red; grid-column: 1 / -1'>" . $_SESSION['error_message'] . "</div>";
+            }
+            ?>
         </div>
 
-        <!--        Regra de validação: a quantidade não pode ser negativa -->
-        <!--        Implementada colocando o mínimo do input number como 0, ou seja, min=0. Assim, o usuário não pode inserir um valor negativo para a quantidade.-->
         <div class="formulario-div">
             <label class="formulario-label" for="quantity">Quantidade</label>
             <input name="quantity"
@@ -55,6 +63,11 @@ require_once __DIR__ . "/header.php";
                    id="quantity"
                    placeholder="Digite uma quantidade"
                    required/>
+            <?php
+            if (!empty($_SESSION['error_message']) && isset($_SESSION['varname']) && $_SESSION['varname'] === 'quantity') {
+                echo "<div style='color: red'>" . $_SESSION['error_message'] . "</div>";
+            }
+            ?>
         </div>
 
         <div class="formulario-div">
@@ -67,6 +80,11 @@ require_once __DIR__ . "/header.php";
                    id="price"
                    placeholder="Digite um preço"
                    required/>
+            <?php
+            if (!empty($_SESSION['error_message']) && isset($_SESSION['varname']) && $_SESSION['varname'] === 'price') {
+                echo "<div style='color: red'>" . $_SESSION['error_message'] . "</div>";
+            }
+            ?>
         </div>
 
         <div class="formulario-div">
@@ -77,6 +95,11 @@ require_once __DIR__ . "/header.php";
                    id="description"
                    placeholder="Digite uma descrição"
                    required/>
+            <?php
+            if (!empty($_SESSION['error_message']) && isset($_SESSION['varname']) && $_SESSION['varname'] === 'description') {
+                echo "<div style='color: red'>" . $_SESSION['error_message'] . "</div>";
+            }
+            ?>
         </div>
 
         <div class="formulario-div">
@@ -87,6 +110,11 @@ require_once __DIR__ . "/header.php";
                    id="image"
                    placeholder="Envie uma imagem"
                    accept="image/*"/>
+            <?php
+            if (!empty($_SESSION['error_message']) && isset($_SESSION['varname']) && $_SESSION['varname'] === 'image') {
+                echo "<div style='color: red'>" . $_SESSION['error_message'] . "</div>";
+            }
+            ?>
         </div>
 
         <div class="formulario-botao">
@@ -94,6 +122,11 @@ require_once __DIR__ . "/header.php";
                    class="formulario-post"
                    type="submit"
                    value="CADASTRAR PRODUTO"/>
+<!--            --><?php
+//            if (!empty($_SESSION['error_message']) && !isset($_SESSION['varname'])) {
+//                echo "<div style='color: red'>" . $_SESSION['error_message'] . "</div>";
+//            }
+//            ?>
         </div>
 
     </form>

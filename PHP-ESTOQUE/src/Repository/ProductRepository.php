@@ -71,12 +71,13 @@ class ProductRepository
             $success = $statement->execute();
 
         } catch (PDOException $e) {
-//            if ($statement->rowCount() !== 1) {
-//                header('Location: /?error=update-row-count-not-1');
-//            }
 
             ErrorLogMessage::log($e, $e->getMessage());
             return false;
+        }
+
+        if ($statement->rowCount() !== 1) {
+            header('Location: /?error=update-row-count-not-1');
         }
 
         $id = $this->pdo->lastInsertId();

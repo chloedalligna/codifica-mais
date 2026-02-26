@@ -43,11 +43,16 @@ require_once __DIR__ . "/header-login.php";
                    id="password"
                    placeholder="Digite sua senha"
                    required />
+            <?php
+            if (!empty($_SESSION['error_message'])) {
+                echo "<div class='password-validation' style='color: red'></div>";
+            ?>
         </div>
 
         <div class="formulario-botao">
             <input name="signup"
                    class="formulario-post"
+                   id="signup-button"
                    type="submit"
                    value="CRIAR CONTA" />
         </div>

@@ -7,11 +7,8 @@ use Chloe\PhpEstoque\Entity\Product;
 use Chloe\PhpEstoque\ErrorLogMessage;
 use Chloe\PhpEstoque\InvalidException;
 use Chloe\PhpEstoque\Repository\ProductRepository;
-use DateTime;
 use Exception;
 use Throwable;
-
-//use http\Exception\InvalidArgumentException;
 
 class CreateProductController implements Controller
 {
@@ -31,32 +28,27 @@ class CreateProductController implements Controller
 
             $name = filter_input(INPUT_POST, 'name');
             if (empty($name)) {
-//                header('Location: /create?error=name');
-                throw new InvalidException('nome', 'cadastro');
+                throw new InvalidException('nome', 'name');
             }
 
             $subcategoryId = filter_input(INPUT_POST, 'subcategoryName');
             if (empty($subcategoryId)) {
-//                header('Location: /create?error=subcategory');
-                throw new InvalidException('subcategoria', 'cadastro');
+                throw new InvalidException('subcategoria', 'subcategoryName');
             }
 
             $quantity = filter_input(INPUT_POST, 'quantity', FILTER_VALIDATE_INT);
-            if (empty($quantity) && $quantity !== 0) {
-//                header('Location: /create?error=quantity');
-                throw new InvalidException('quantidade', 'cadastro');
+            if ((empty($quantity) || $quantity < 0) && $quantity !== 0) {
+                throw new InvalidException('quantidade', 'quantity');
             }
 
             $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
-            if (empty($price)) {
-//                header('Location: /create?error=price');
-                throw new InvalidException('preço', 'cadastro');
+            if (empty($price) || $price < 0) {
+                throw new InvalidException('preço', 'price');
             }
 
             $description = filter_input(INPUT_POST, 'description');
             if (empty($description)) {
-//                header('Location: /create?error=description');
-                throw new InvalidException('descrição', 'cadastro');
+                throw new InvalidException('descrição', 'description');
             }
 
             if (isset($_POST['create'])) {
@@ -79,7 +71,6 @@ class CreateProductController implements Controller
                 $success = $this->productRepository->create($product);
 
                 if ($success === false) {
-//                    header('Location: /create?error=create');
                     throw new Exception('Erro ao criar o produto. Por favor, tente novamente mais tarde.');
 
                 } else {
@@ -89,6 +80,13 @@ class CreateProductController implements Controller
             }
         } catch (InvalidException | Throwable $e) {
             ErrorLogMessage::log($e, $e->getMessage());
+
+            if ($e instanceof InvalidException) {
+                $_SESSION['error_message'] = $e->getMessage();
+            } else {
+                $_SESSION['error_message'] = "Erro ao realizar o cadastro do produto.";
+            }
+            header('Location: /create?error');
         }
     }
 }

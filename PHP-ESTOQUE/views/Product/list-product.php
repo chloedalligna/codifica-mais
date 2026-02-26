@@ -42,7 +42,7 @@ $backgroundColor = [
                 <li class="list-li" id="products-li">
                     <div class="list-div produtos" style="background-color: <?= $backgroundColor[$product->getStatusId()]?>" >
                         <span class="column" id="column-product">
-                           htmlspecialchars(<?= $product->getName(); ?>)
+                           <?= $product->getName(); ?>
                         </span>
                         <span class="column" id="column-quantity">
                             <?= $product->getQuantity(); ?>

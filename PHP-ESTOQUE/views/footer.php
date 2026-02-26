@@ -61,8 +61,23 @@
             }
         });
     });
+
+    const signupButton = document.getElementbyId('signup-button');
+    signupButton.addEventListener("input", function () {
+        const password = document.getElementById('password')
+        const passwordValidation = document.getElementById('password-validation')
+        switch (password) {
+            case password.length < 8:
+                passwordValidation.innerHTML = 'A senha deve conter 8 caracteres.';
+            case password.includes('1' || '2' || '3' || '4' || '5' || '6' || '7' || '8' || '9' || '0') === false:
+                passwordValidation.innerHTML = 'A senha deve conter 8 caracteres.';
+        }
+    })
+
+
+
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js" integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js" integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
 <!--<script src="js/index.js"></script>-->
 </html>

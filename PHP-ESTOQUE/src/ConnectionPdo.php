@@ -4,14 +4,13 @@ namespace Chloe\PhpEstoque;
 
 use PDO;
 
-require_once __DIR__ . '/../config/credencials-database.php';
+$GLOBALS['databasePassword'] = require_once __DIR__ . "/../config/database_credentials.php";
 
 class ConnectionPdo
 {
-    public static function connect(): ?PDO
+    public static function connect(): PDO
     {
-        /** @var string $password */
-        return new PDO('mysql:host=localhost;dbname=controle_de_estoque', 'root', $password);
+        return new PDO('mysql:host=localhost;dbname=controle_de_estoque', 'root', $GLOBALS['databasePassword']);
     }
 
 }
