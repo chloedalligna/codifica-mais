@@ -3,8 +3,6 @@
 namespace Chloe\PhpEstoque\Controller\UserLogin;
 
 use Chloe\PhpEstoque\Controller\Controller;
-use Chloe\PhpEstoque\Entity\User;
-use Chloe\PhpEstoque\Repository\UserRepository;
 
 class LoginFormController implements Controller
 {

@@ -1,4 +1,4 @@
-<?php ?><?php
+<?php
 
 /** @var array $databaseCategorias */
 
@@ -32,7 +32,7 @@
                     </button>
                 </div>
             </li>
-            <li class="nav-li nav-home" style="margin-left: 10vw;>
+            <li class="nav-li nav-home" style="margin-left: 10vw;">
                 <div class="nav-li-div nav-home-div">
                     <img class="logo" src="assets/logo.png" alt="logo">
                 </div>

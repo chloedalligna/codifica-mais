@@ -4,7 +4,11 @@ namespace Chloe\PhpEstoque\Controller\Product;
 
 use Chloe\PhpEstoque\Controller\Controller;
 use Chloe\PhpEstoque\Entity\Product;
+use Chloe\PhpEstoque\ErrorLogMessage;
+use Chloe\PhpEstoque\InvalidException;
 use Chloe\PhpEstoque\Repository\ProductRepository;
+use Exception;
+use Throwable;
 
 class CreateProductController implements Controller
 {
@@ -15,65 +19,74 @@ class CreateProductController implements Controller
         $this->productRepository = $productRepository;
     }
 
+    /**
+     * @throws InvalidException
+     */
     public function processRequest(): void
     {
+        try {
 
-        $name = filter_input(INPUT_POST, 'name');
-        if ($name === false || $name === null) {
-            header('Location: /create?error=name');
-            exit();
-        }
-
-        $subcategoryId = filter_input(INPUT_POST, 'subcategoryName');
-        if (empty($subcategoryId)) {
-            header('Location: /create?error=subcategory');
-            exit();
-        }
-
-        $quantity = filter_input(INPUT_POST, 'quantity', FILTER_VALIDATE_INT);
-        if ($quantity === false || $quantity === null) {
-            header('Location: /create?error=quantity');
-            exit();
-        }
-
-        $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
-        if ($price === false || $price === null) {
-            header('Location: /create?error=price');
-            exit();
-        }
-
-        $description = filter_input(INPUT_POST, 'description');
-        if ($description === false || $description === null) {
-            header('Location: /create?error=description');
-            exit();
-        }
-
-        if (isset($_POST['create'])){
-
-            $categoryId = $this->productRepository->getCategoryFromSubcategory($subcategoryId);
-
-            $product = new Product(
-                $name,
-                $categoryId,
-                $subcategoryId,
-                $quantity,
-                $price,
-                $description);
-
-            if (isset($_FILES['image']) && !empty($_FILES['image']['tmp_name'])) {
-                $product->setImagePath(uniqid() . $_FILES['image']['name']);
-                move_uploaded_file($_FILES['image']['tmp_name'], $product->getImageDir());
+            $name = filter_input(INPUT_POST, 'name');
+            if (empty($name)) {
+                throw new InvalidException('nome', 'name');
             }
 
-            $success = $this->productRepository->create($product);
+            $subcategoryId = filter_input(INPUT_POST, 'subcategoryName');
+            if (empty($subcategoryId)) {
+                throw new InvalidException('subcategoria', 'subcategoryName');
+            }
 
-            if ($success === false) {
-                header('Location: /create?error=create');
+            $quantity = filter_input(INPUT_POST, 'quantity', FILTER_VALIDATE_INT);
+            if ((empty($quantity) || $quantity < 0) && $quantity !== 0) {
+                throw new InvalidException('quantidade', 'quantity');
+            }
 
+            $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
+            if (empty($price) || $price < 0) {
+                throw new InvalidException('preço', 'price');
+            }
+
+            $description = filter_input(INPUT_POST, 'description');
+            if (empty($description)) {
+                throw new InvalidException('descrição', 'description');
+            }
+
+            if (isset($_POST['create'])) {
+
+                $categoryId = $this->productRepository->getCategoryFromSubcategory($subcategoryId);
+
+                $product = new Product(
+                    $name,
+                    $categoryId,
+                    $subcategoryId,
+                    $quantity,
+                    $price,
+                    $description);
+
+                if (isset($_FILES['image']) && !empty($_FILES['image']['tmp_name'])) {
+                    $product->setImagePath(uniqid() . $_FILES['image']['name']);
+                    move_uploaded_file($_FILES['image']['tmp_name'], $product->getImageDir());
+                }
+
+                $success = $this->productRepository->create($product);
+
+                if ($success === false) {
+                    throw new Exception('Erro ao criar o produto. Por favor, tente novamente mais tarde.');
+
+                } else {
+                    header('Location: /?success=product_created');
+                }
+
+            }
+        } catch (InvalidException | Throwable $e) {
+            ErrorLogMessage::log($e, $e->getMessage());
+
+            if ($e instanceof InvalidException) {
+                $_SESSION['error_message'] = $e->getMessage();
             } else {
-                header('Location: /?success=product_created');
+                $_SESSION['error_message'] = "Erro ao realizar o cadastro do produto.";
             }
-
+            header('Location: /create?error');
         }
     }
 }

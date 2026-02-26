@@ -4,6 +4,8 @@ namespace Chloe\PhpEstoque\Repository;
 
 use Chloe\PhpEstoque\ConnectionPdo;
 use Chloe\PhpEstoque\Entity\User;
+use Chloe\PhpEstoque\ErrorLogMessage;
+use Chloe\PhpEstoque\LoginException;
 use PDO;
 
 class UserRepository
@@ -11,18 +13,10 @@ class UserRepository
 
     private PDO $pdo;
 
-    public function __construct()
+    public function __construct(PDO $pdo)
     {
-        $this->pdo = ConnectionPdo::connect();
+        $this->pdo = $pdo;
     }
-
-//    /**
-//     * @return PDO
-//     */
-//    public function getPdo(): PDO
-//    {
-//        return $this->pdo;
-////    }
 
     // READ ALL
     public function listAll(): array
@@ -72,9 +66,9 @@ class UserRepository
     }
 
     // DELETE
-    public function deleteProduct($id): bool
+    public function deleteUser($id): bool
     {
-        $sql = 'DELETE FROM produtos WHERE id = :id';
+        $sql = 'DELETE FROM users WHERE id = :id';
         $statement = $this->pdo->prepare($sql);
         $statement->bindValue(':id', $id);
 
@@ -119,24 +113,30 @@ class UserRepository
     // AUTENTICAÇÃO DO LOGIN DO USER
     public function loginAuthentication($email, $password): void
     {
-        $sql = 'SELECT * FROM users
-                WHERE email = :email';
+            try {
+            $sql = 'SELECT * FROM users
+                    WHERE email = :email';
 
-        $statement = $this->pdo->prepare($sql);
-        $statement->bindValue(':email', $email);
-        $statement->execute();
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(':email', $email);
+            $statement->execute();
 
-        $userData = $statement->fetch(PDO::FETCH_ASSOC);
+            $userData = $statement->fetch(PDO::FETCH_ASSOC);
 
-        $correctPassword = password_verify($password, $userData['password']);
+            $correctPassword = password_verify($password, $userData['password']);
 
-        if ($correctPassword) {
-            $_SESSION['username'] = $userData['username'];
-            $_SESSION['email'] = $email;
-            $_SESSION['logado'] = true;
-            header('Location: /?success=user_logged_in');
-        } else {
-            header('Location: /login?error=loginAuthentication');
+            if ($correctPassword) {
+                $_SESSION['username'] = $userData['username'];
+                $_SESSION['email'] = $email;
+                $_SESSION['logado'] = true;
+                header('Location: /?success=user_logged_in');
+            } else {
+    //            header('Location: /login?error=loginAuthentication');
+                throw new LoginException();
+            }
+        }
+        catch (LoginException $e) {
+            ErrorLogMessage::log($e, $e->getMessage());
         }
     }
 

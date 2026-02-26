@@ -18,35 +18,42 @@ class SignupController implements Controller
     public function processRequest(): void
     {
         $username = filter_input(INPUT_POST, 'username');
-        if ($username === false || $username === null) {
+        if (empty($username)) {
             header('Location: /signup?error=username');
             exit();
         }
 
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-        if ($email === false || $email === null) {
+        if (empty($email)) {
             header('Location: /signup?error=email');
             exit();
         }
 
         $password = filter_input(INPUT_POST, 'password');
-        if ($password === false || $password === null) {
-            header('Location: /signup?error=passaword');
+        if (empty($password)) {
+            header('Location: /signup?error=password');
             exit();
         }
 
-        $user = new User (
-            $username,
-            $email,
-            $password);
+        $emailAvailability = $this->userRepository->verifyEmailAvailability($email);
 
-        $success = $this->userRepository->create($user);
+        if ($emailAvailability && isset($_POST['signup'])) {
 
-        if ($success === false) {
-            header('Location: /login?error=signup');
-        } else {
-            header('Location: /login?success=usuario_cadastrado');
+            $user = new User (
+                $username,
+                $email,
+                $password);
+
+            $success = $this->userRepository->create($user);
+
+            if ($success === false) {
+                header('Location: /login?error=signup');
+            } else {
+                header('Location: /login?success=usuario_cadastrado');
+            }
+
         }
+
     }
 
 }
